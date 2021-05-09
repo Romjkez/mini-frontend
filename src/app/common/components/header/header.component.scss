@@ -1,0 +1,16 @@
+@use "../../../../variables";
+
+:host {
+  height: 70px;
+  background-color: variables.$bg-secondary;
+}
+
+img {
+  width: 70px;
+}
+
+::ng-deep {
+  .p-menubar-start {
+    margin-right: 1rem;
+  }
+}

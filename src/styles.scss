@@ -1,1 +1,18 @@
-@import "~primeng/resources/themes/md-dark-deeppurple/theme.css";
+@use "variables";
+
+@font-face {
+  font-family: "MINI CYR Sans Serif";
+  src: url("./assets/fonts/MINISansSerifCYR-Regular.woff2") format("woff2"),
+  url("./assets/fonts/MINISansSerifCYR-Regular.woff") format("woff");
+}
+
+.p-component {
+  // color: variables.$text;
+  font-family: variables.$fontFamily;
+}
+
+body {
+  background: variables.$bg;
+  font-family: variables.$fontFamily;
+  color: variables.$text;
+}

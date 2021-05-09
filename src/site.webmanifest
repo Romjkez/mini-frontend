@@ -1,6 +1,8 @@
 {
     "name": "MINI Study",
     "short_name": "MINI Study",
+    "description": "Internal MINI microlearning app",
+    "lang": "ru-RU",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
