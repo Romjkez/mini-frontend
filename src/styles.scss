@@ -1,7 +1,8 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
 :root {
   --font-family: "MINI CYR Sans Serif", Roboto, -apple-system, sans-serif;
 }
-
 
 @font-face {
   font-family: "MINI CYR Sans Serif";
@@ -9,7 +10,12 @@
   url("./assets/fonts/MINISansSerifCYR-Regular.woff") format("woff");
 }
 
-body {
-  background: var(--surface-a);
+.p-component {
   font-family: var(--font-family);
+}
+
+body {
+  font-family: var(--font-family);
+  background: no-repeat url("assets/img/mini-bg1.webp"), var(--surface-a);
+  background-size: cover;
 }
