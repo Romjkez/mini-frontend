@@ -9,6 +9,9 @@ import { MenubarModule } from 'primeng/menubar';
 import { SharedModule } from 'primeng/api';
 import { AvatarMenuComponent } from './common/components/avatar-menu/avatar-menu.component';
 import { AvatarModule } from 'primeng/avatar';
+import { SlideMenuModule } from 'primeng/slidemenu';
+import { ButtonModule } from 'primeng/button';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,9 +23,12 @@ import { AvatarModule } from 'primeng/avatar';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     MenubarModule,
     SharedModule,
     AvatarModule,
+    SlideMenuModule,
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
