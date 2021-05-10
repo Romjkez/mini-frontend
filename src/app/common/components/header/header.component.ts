@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Subject } from 'rxjs';
+import { AuthService } from '../../../modules/auth/auth.service';
 
 @Component({
   selector: 'mn-header',
@@ -7,11 +9,11 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
-
+export class HeaderComponent implements OnInit, OnDestroy {
   items: MenuItem[];
+  private readonly destroy$: Subject<void> = new Subject<void>();
 
-  constructor() {
+  constructor(private readonly authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -43,4 +45,10 @@ export class HeaderComponent implements OnInit {
     ];
   }
 
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
+

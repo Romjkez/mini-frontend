@@ -5,13 +5,17 @@ import { NotFoundPageComponent } from './common/components/not-found-page/not-fo
 
 const routes: Routes = [
   {
-    path: '',
+    path: '', // TODO: add guard
     pathMatch: 'full',
     component: MainPageComponent,
   },
   {
+    path: 'auth', // TODO: add guard
+    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
     path: '404',
-    pathMatch: 'full',
+    pathMatch: 'full', // TODO: add guard
     component: NotFoundPageComponent,
   },
   {

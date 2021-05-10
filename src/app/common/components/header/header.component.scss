@@ -1,8 +1,6 @@
-@use "../../../../variables";
-
 :host {
   height: 70px;
-  background-color: variables.$bg-secondary;
+  background-color: var(--surface-a);
 }
 
 img {
@@ -10,6 +8,12 @@ img {
 }
 
 ::ng-deep {
+  .p-menubar {
+    border-right: none;
+    border-left: none;
+    border-top: none;
+  }
+
   .p-menubar-start {
     margin-right: 1rem;
   }

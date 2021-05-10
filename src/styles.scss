@@ -1,4 +1,7 @@
-@use "variables";
+:root {
+  --font-family: "MINI CYR Sans Serif", Roboto, -apple-system, sans-serif;
+}
+
 
 @font-face {
   font-family: "MINI CYR Sans Serif";
@@ -6,13 +9,7 @@
   url("./assets/fonts/MINISansSerifCYR-Regular.woff") format("woff");
 }
 
-.p-component {
-  // color: variables.$text;
-  font-family: variables.$fontFamily;
-}
-
 body {
-  background: variables.$bg;
-  font-family: variables.$fontFamily;
-  color: variables.$text;
+  background: var(--surface-a);
+  font-family: var(--font-family);
 }
