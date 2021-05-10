@@ -12,12 +12,14 @@ import { AvatarModule } from 'primeng/avatar';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundPageComponent } from './common/components/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    AvatarMenuComponent
+    AvatarMenuComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
