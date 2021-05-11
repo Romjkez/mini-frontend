@@ -13,6 +13,7 @@ import { SlideMenuModule } from 'primeng/slidemenu';
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundPageComponent } from './common/components/not-found-page/not-found-page.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NotFoundPageComponent } from './common/components/not-found-page/not-fo
     AvatarModule,
     SlideMenuModule,
     ButtonModule,
+    CardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
