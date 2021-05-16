@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../../../modules/auth/auth.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'mn-header',
@@ -11,9 +13,11 @@ import { AuthService } from '../../../modules/auth/auth.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   items: MenuItem[];
+  currentUrl$: Observable<string>;
   private readonly destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private readonly authService: AuthService) {
+  constructor(public readonly authService: AuthService,
+              private readonly router: Router) {
   }
 
   ngOnInit(): void {
@@ -43,6 +47,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         routerLink: '/news',
       }
     ];
+    this.currentUrl$ = this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        map((event: NavigationEnd) => event.urlAfterRedirects)
+      );
   }
 
 
