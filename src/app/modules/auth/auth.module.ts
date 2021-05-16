@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
     CardModule,
     InputTextModule,
     ButtonModule,
+    PasswordModule
   ],
 })
 export class AuthModule {

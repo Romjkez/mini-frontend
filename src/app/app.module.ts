@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenubarModule } from 'primeng/menubar';
-import { SharedModule } from 'primeng/api';
+import { MessageService, SharedModule } from 'primeng/api';
 import { AvatarMenuComponent } from './common/components/avatar-menu/avatar-menu.component';
 import { AvatarModule } from 'primeng/avatar';
 import { SlideMenuModule } from 'primeng/slidemenu';
@@ -14,6 +14,7 @@ import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundPageComponent } from './common/components/not-found-page/not-found-page.component';
 import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,9 @@ import { CardModule } from 'primeng/card';
     SlideMenuModule,
     ButtonModule,
     CardModule,
+    ToastModule,
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
