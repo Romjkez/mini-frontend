@@ -55,11 +55,10 @@ export class LoginPageComponent implements OnInit {
           return this.router.navigateByUrl('/');
         }),
         catchError((err: HttpErrorResponse) => {
-          console.log(err);
           this.messageService.add({
             severity: 'error',
             summary: 'Ошибка авторизации',
-            detail: errorToText(err?.error?.message),
+            detail: errorToText(err?.error?.message, err.status),
             life: TOAST_ERROR_TIME
           });
           throw new HttpErrorResponse(err);

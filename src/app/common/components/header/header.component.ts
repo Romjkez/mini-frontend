@@ -3,7 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../../../modules/auth/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'mn-header',
@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ];
     this.currentUrl$ = this.router.events
       .pipe(
+        takeUntil(this.destroy$),
         filter(event => event instanceof NavigationEnd),
         map((event: NavigationEnd) => event.urlAfterRedirects)
       );
