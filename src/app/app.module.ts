@@ -11,10 +11,11 @@ import { AvatarMenuComponent } from './common/components/avatar-menu/avatar-menu
 import { AvatarModule } from 'primeng/avatar';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { ButtonModule } from 'primeng/button';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NotFoundPageComponent } from './common/components/not-found-page/not-found-page.component';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
+import { AuthInterceptor } from './modules/auth/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,11 @@ import { ToastModule } from 'primeng/toast';
     CardModule,
     ToastModule,
   ],
-  providers: [MessageService],
+  providers: [
+    MessageService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
