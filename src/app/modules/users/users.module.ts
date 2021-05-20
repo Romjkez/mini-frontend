@@ -10,6 +10,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CreateUserFormComponent } from './components/create-user-form/create-user-form.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { CreateUserFormComponent } from './components/create-user-form/create-us
     MultiSelectModule,
     ReactiveFormsModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    InputTextModule
   ],
   providers: [UsersService],
 })

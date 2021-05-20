@@ -1,0 +1,32 @@
+<div class="container" style="max-width: 800px">
+  <div class="row my-5">
+    <div class="col">
+      <p-card>
+        <h1 class="h2 text-center">Добавление пользователя</h1>
+        <form [formGroup]="form" class="mt-4 container">
+          <div class="row">
+            <label for="firstName" class="col-sm-2">Имя</label>
+            <input formControlName="firstName" type="text" id="firstName" class="col col-sm-10 p-inputtext-sm"
+                   pInputText>
+          </div>
+          <div class="row mt-4">
+            <label for="lastName" class="col-sm-2">Фамилия</label>
+            <input formControlName="lastName" type="text" id="lastName" class="col-sm-10 p-inputtext-sm" pInputText>
+          </div>
+          <div class="row mt-4">
+            <label for="email" class="col-sm-2">Email</label>
+            <input formControlName="email" type="text" id="email" class="col-sm-10 p-inputtext-sm" pInputText>
+          </div>
+          <div class="row mt-4">
+            <label for="company" class="col-sm-2">Компания</label>
+            <input formControlName="company" type="text" id="company" class="col-sm-10 p-inputtext-sm" pInputText>
+          </div>
+          <div class="row mt-4">
+            <button pButton type="button" label="Сохранить"></button>
+          </div>
+        </form>
+      </p-card>
+
+    </div>
+  </div>
+</div>
