@@ -13,6 +13,13 @@ import { CreateUserFormComponent } from './components/create-user-form/create-us
 import { InputTextModule } from 'primeng/inputtext';
 import { UserViewComponent } from './components/user-view/user-view.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { SharedModule } from '../shared/shared.module';
+import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
+import { BadgeModule } from 'primeng/badge';
+import { TooltipModule } from 'primeng/tooltip';
+import { UserRatingPipe } from './components/pipes/user-rating.pipe';
+import { UserRolePipe } from './components/pipes/user-role.pipe';
+import { ChipModule } from 'primeng/chip';
 
 
 @NgModule({
@@ -20,7 +27,9 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     UsersListComponent,
     CreateUserFormComponent,
     UserViewComponent,
-    UserFormComponent
+    UserFormComponent,
+    UserRatingPipe,
+    UserRolePipe
   ],
   imports: [
     CommonModule,
@@ -31,9 +40,16 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     ReactiveFormsModule,
     FormsModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    SharedModule,
+    BadgeModule,
+    TooltipModule,
+    ChipModule,
   ],
-  providers: [UsersService],
+  providers: [
+    UsersService,
+    {provide: CRUD_SERVICE, useExisting: UsersService}
+  ],
 })
 export class UsersModule {
 }

@@ -8,5 +8,6 @@ import { FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserFormComponent {
+  @Input() readonly: boolean;
   @Input() form: FormGroup;
 }

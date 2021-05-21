@@ -7,11 +7,16 @@ import { SimpleUser } from './models/simple-user.model';
 import { GetManyUsersDto } from './dto/get-many-users.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './models/user.model';
+import { GetByIdService } from '../../common/models/get-by-id.service';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements GetByIdService<User> {
 
   constructor(private readonly http: HttpClient) {
+  }
+
+  getById(id: number): Observable<User> {
+    return this.http.get<User>(`${environment.apiHost}/user/${id}`);
   }
 
   getList(dto: GetManyUsersDto): Observable<GetManyResponseDto<SimpleUser>> {

@@ -40,6 +40,10 @@ body {
   background: var(--surface-900);
 }
 
+.p-datatable-scrollable-body {
+  overflow-y: auto !important; // prevent table from constantly showing scrollbar
+}
+
 .date-cell {
   font-family: monospace;
 }

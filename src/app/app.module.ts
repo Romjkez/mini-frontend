@@ -22,7 +22,7 @@ import { AuthInterceptor } from './modules/auth/interceptors/auth.interceptor';
     AppComponent,
     HeaderComponent,
     AvatarMenuComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
