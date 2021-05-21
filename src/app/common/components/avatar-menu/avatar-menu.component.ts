@@ -26,7 +26,8 @@ export class AvatarMenuComponent implements OnInit {
     this.items = [
       {
         label: 'Профиль',
-        icon: 'pi pi-user'
+        icon: 'pi pi-user',
+        routerLink: `/users/${this.authService.getPayload().sub}`
       },
       {
         label: 'Настройки',
