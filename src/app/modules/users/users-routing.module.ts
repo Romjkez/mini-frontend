@@ -12,6 +12,11 @@ const routes: Routes = [
     component: UsersListComponent,
   },
   {
+    path: 'create',
+    pathMatch: 'full',
+    component: CreateUserFormComponent,
+  },
+  {
     path: ':id',
     pathMatch: 'full',
     component: UserViewComponent,
@@ -19,11 +24,6 @@ const routes: Routes = [
       user: ByIdResolver,
     }
   },
-  {
-    path: 'create',
-    pathMatch: 'full',
-    component: CreateUserFormComponent,
-  }
 ];
 
 @NgModule({
