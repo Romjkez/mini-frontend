@@ -11,12 +11,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CreateUserFormComponent } from './components/create-user-form/create-user-form.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { UserViewComponent } from './components/user-view/user-view.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 
 @NgModule({
   declarations: [
     UsersListComponent,
-    CreateUserFormComponent
+    CreateUserFormComponent,
+    UserViewComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,

@@ -21,4 +21,8 @@ export class UsersService {
   create(dto: CreateUserDto): Observable<User> {
     return this.http.post<User>(`${environment.apiHost}/user`, dto);
   }
+
+  createBulk(dto: Array<CreateUserDto>): Observable<Array<User>> {
+    return this.http.post<Array<User>>(`${environment.apiHost}/user/bulk`, {data: dto});
+  }
 }
