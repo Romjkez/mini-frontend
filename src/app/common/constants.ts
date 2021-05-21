@@ -13,3 +13,7 @@ export const ERRORS: Record<string, string> = {
   EMAIL_ALREADY_EXISTS: 'Пользователь с таким email уже зарегистрирован',
   USER_NOT_FOUND: 'Пользователь с таким email не найден',
 };
+
+export const ROWS_PER_PAGE = 15;
+export const ROWS_PER_PAGE_OPTIONS = [15, 30, 50];
+export const CURRENT_PAGE_REPORT_TEMPLATE = 'Показаны с {first} по {last} из {totalRecords} записей';

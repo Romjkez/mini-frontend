@@ -11,13 +11,14 @@
                [columns]="selectedColumns"
                [paginator]="true"
                [value]="users | async"
-               [rows]="10"
+               [rows]="perPage"
                [resetPageOnSort]="true"
                [totalRecords]="totalItems | async"
                [showCurrentPageReport]="true"
-               currentPageReportTemplate="Показаны с {first} по {last} из {totalRecords} записей"
-               [rowsPerPageOptions]="[15,30,50]"
+               [currentPageReportTemplate]="currentPageReportTemplate"
+               [rowsPerPageOptions]="perPageOptions"
                [rowHover]="true"
+               (onPage)="pageChanged($event)"
                styleClass="p-datatable-sm">
         <ng-template pTemplate="colgroup">
           <colgroup>
