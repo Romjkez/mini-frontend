@@ -1,0 +1,24 @@
+:host {
+  height: 70px;
+  background-color: var(--surface-a);
+}
+
+img {
+  width: 70px;
+}
+
+::ng-deep {
+  .p-menubar {
+    border-right: none;
+    border-left: none;
+    border-top: none;
+  }
+
+  .p-menubar-start {
+    margin-right: 1rem;
+  }
+}
+
+.p-button {
+  color: #212121 !important;
+}

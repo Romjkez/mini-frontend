@@ -1,0 +1,17 @@
+<p-menubar [model]="authService.isAuthorized() ? items : []">
+  <ng-template pTemplate="start">
+    <div class="d-flex flex-column align-items-center">
+      <img src="assets/img/mini-logo-white-rect.svg" alt="Логотип">
+      <span>STUDY</span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <mn-avatar-menu *ngIf="authService.isAuthorized(); else button"></mn-avatar-menu>
+    <ng-template #button>
+      <a *ngIf="(currentUrl$ | async) !=='/auth/sign-in'" routerLink="/auth/sign-in" pButton label="Войти"
+         class="p-button-info text-decoration-none"></a>
+    </ng-template>
+  </ng-template>
+</p-menubar>
+
+

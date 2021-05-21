@@ -1,0 +1,26 @@
+#title {
+  color: var(--text-color);
+
+  small {
+    // opacity: .9
+  }
+}
+
+p-card {
+  max-width: 500px;
+}
+
+input {
+  margin-left: 10px
+}
+
+::ng-deep {
+  .p-card-body {
+    background-color: var(--surface-b);
+    padding: 25px !important;
+  }
+
+  .p-card-content {
+    padding-top: 0 !important;
+  }
+}

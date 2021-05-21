@@ -1,0 +1,16 @@
+.multiple-users-item {
+  display: block;
+  border: 1px solid var(--surface-500);
+}
+
+#add-user-btn {
+  bottom: 25px;
+  right: 25px;
+}
+
+@media screen and (max-width: 1024px) {
+  #add-user-btn {
+    bottom: 15px;
+    right: 15px;
+  }
+}

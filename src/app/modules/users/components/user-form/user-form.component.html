@@ -1,0 +1,23 @@
+<div [formGroup]="form" class="mt-4 container">
+  <div class="row align-items-center">
+    <label for="firstName" class="col-sm-2">Имя</label>
+    <input [readOnly]="readonly" formControlName="firstName" type="text" id="firstName"
+           class="col col-sm-10 p-inputtext-sm"
+           pInputText>
+  </div>
+  <div class="row align-items-center mt-4">
+    <label for="lastName" class="col-sm-2">Фамилия</label>
+    <input [readOnly]="readonly" formControlName="lastName" type="text" id="lastName" class="col-sm-10 p-inputtext-sm"
+           pInputText>
+  </div>
+  <div class="row align-items-center mt-4">
+    <label for="email" class="col-sm-2">Email</label>
+    <input [readOnly]="readonly" formControlName="email" type="text" id="email" class="col-sm-10 p-inputtext-sm"
+           pInputText>
+  </div>
+  <div class="row align-items-center mt-4">
+    <label for="company" class="col-sm-2">Компания</label>
+    <input [readOnly]="readonly" formControlName="company" type="text" id="company" class="col-sm-10 p-inputtext-sm"
+           pInputText>
+  </div>
+</div>

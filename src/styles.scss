@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --font-family: "MINI CYR Sans Serif", Roboto, -apple-system, sans-serif;
+}
+
+@font-face {
+  font-family: "MINI CYR Sans Serif";
+  src: url("./assets/fonts/MINISansSerifCYR-Regular.woff2") format("woff2"),
+  url("./assets/fonts/MINISansSerifCYR-Regular.woff") format("woff");
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: var(--text-color);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: var(--text-color);
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: var(--surface-900);
+}
+
+.p-component {
+  font-family: var(--font-family);
+}
+
+body {
+  font-family: var(--font-family);
+  background: no-repeat url("assets/img/mini-bg1.webp"), var(--surface-a);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):hover {
+  background: var(--surface-900);
+}
+
+.p-datatable-scrollable-body {
+  overflow-y: auto !important; // prevent table from constantly showing scrollbar
+}
+
+.date-cell {
+  font-family: monospace;
+}
+
+.p-button-xl {
+  height: 4rem !important;
+  width: 4rem !important;
+}

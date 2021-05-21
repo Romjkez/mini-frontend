@@ -1,0 +1,29 @@
+<div class="container-sm mt-5">
+  <div id="title" class="text-center mb-4">
+    <h1 class="mb-0">MINI STUDY</h1>
+    <small>Административная панель</small>
+  </div>
+  <div class="d-flex justify-content-center">
+    <p-card>
+
+      <h2 class="h3 text-center mb-4">Авторизация</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="d-flex justify-content-end align-items-center mb-3">
+          <label for="email" class="me-2">Email</label>
+          <input formControlName="email" id="email" type="text" pInputText class="p-inputtext-sm"
+                 placeholder="Введите email">
+        </div>
+        <div class="d-flex justify-content-end align-items-center mb-4">
+          <label for="pass" class="me-2">Пароль</label>
+          <p-password formControlName="password" id="pass" [toggleMask]="true" [feedback]="false" class="p-inputtext-sm"
+                      placeholder="Введите пароль"></p-password>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button [disabled]="form.invalid" type="submit" pButton class="p-button-help" label="Авторизоваться"
+                  icon="pi pi-sign-in"></button>
+        </div>
+      </form>
+    </p-card>
+  </div>
+
+</div>

@@ -1,0 +1,5 @@
+<button pButton (click)="menu.toggle($event)"
+        class="p-button-rounded justify-content-center align-items-center p-button-info" [label]="'AD'">
+</button>
+
+<p-slideMenu #menu [popup]="true" [model]="items" viewportHeight="205"></p-slideMenu>

@@ -1,0 +1,32 @@
+<div class="container" style="max-width: 800px">
+  <div class="row my-5">
+    <div class="col">
+      <p-card>
+        <h1 class="h2 text-center">Добавление пользователя</h1>
+        <form class="container" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div *ngFor="let control of users.controls; let i=index" class="d-flex flex-column align-items-end"
+               [ngClass]="users.controls.length>1 ? 'multiple-users-item p-4':''">
+            <button *ngIf="i!==0" pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
+                    title="Удалить пользователя"
+                    (click)="users.removeAt(i)">
+            </button>
+            <mn-user-form class="d-block w-100" [form]="control">
+            </mn-user-form>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <button class="w-100" pButton type="submit" label="Сохранить"></button>
+            </div>
+          </div>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<button [disabled]="users.controls.length > 10"
+        [title]="users.controls.length > 10 ? 'Не более 10 пользователей за раз': 'Добавить пользователя'"
+        pButton type="button" icon="pi pi-plus"
+        id="add-user-btn"
+        class="p-button-rounded p-button-info position-fixed p-button-xl"
+        (click)="addUser()"></button>
