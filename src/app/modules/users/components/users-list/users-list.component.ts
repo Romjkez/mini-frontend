@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { UsersService } from '../../users.service';
 import { TableCol } from '../../../../common/models/table-col';
 import { SimpleUser } from '../../models/simple-user.model';
@@ -38,12 +38,11 @@ export class UsersListComponent implements OnInit {
   totalItems: Observable<number>;
   selectedColumns: Array<TableCol> = this.columns;
 
-  constructor(private readonly userService: UsersService,
-              private readonly cdr: ChangeDetectorRef) {
+  constructor(private readonly userService: UsersService) {
   }
 
   ngOnInit(): void {
-    this.data = this.userService.getList({perPage: ROWS_PER_PAGE, page: 1})
+    this.data = this.userService.getMany({perPage: ROWS_PER_PAGE, page: 1})
       .pipe(
         shareReplay(1),
       );
@@ -59,7 +58,7 @@ export class UsersListComponent implements OnInit {
   }
 
   pageChanged(ev: PaginationChangedEvent): void {
-    this.data = this.userService.getList({perPage: ev.rows, page: calculatePage(ev.first, ev.rows)})
+    this.data = this.userService.getMany({perPage: ev.rows, page: calculatePage(ev.first, ev.rows)})
       .pipe(
         shareReplay(1),
       );

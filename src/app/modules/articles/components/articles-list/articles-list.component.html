@@ -1,1 +1,26 @@
-<p>articles-list works!</p>
+<div class="container-fluid" style="max-width: 1500px;">
+  <div class="row my-3">
+    <div class="col">
+      <a pButton label="Добавить" class="p-button-info text-decoration-none" routerLink="/articles/create"></a>
+    </div>
+  </div>
+  <div *ngFor="let article of articles | async" class="row mb-2">
+    <p-card>
+      <div class="card-content container"
+           [style.backgroundImage]="'url(\'assets/img/black.png\'), url('+article.previewUrl+')'">
+        <div class="row">
+          <div class="col-md-8">{{article.title}}</div>
+          <div class="col-md-4 d-flex justify-content-end">
+            <span title="Просмотры" class="me-4"><i class="pi pi-eye me-2"></i>{{article.finishedBy}}</span>
+            <span title="Избранное"><i class="pi pi-star me-2"></i>{{article.favoriteFor}}</span>
+          </div>
+        </div>
+      </div>
+
+    </p-card>
+  </div>
+
+  <p-paginator [totalRecords]="totalItems | async" [rows]="perPage" [rowsPerPageOptions]="perPageOptions"
+               (onPageChange)="pageChanged($event)">
+  </p-paginator>
+</div>
