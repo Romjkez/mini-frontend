@@ -10,13 +10,15 @@ import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { ArticleViewComponent } from './components/article-view/article-view.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { ChipModule } from 'primeng/chip';
 
 
 @NgModule({
   declarations: [
     ArticlesListComponent,
     CreateArticleComponent,
-    ArticleViewComponent
+    ArticleViewComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,9 @@ import { ArticleViewComponent } from './components/article-view/article-view.com
     ArticlesRoutingModule,
     CardModule,
     ButtonModule,
-    PaginatorModule
+    PaginatorModule,
+    TooltipModule,
+    ChipModule
   ],
   providers: [ArticleService],
 })

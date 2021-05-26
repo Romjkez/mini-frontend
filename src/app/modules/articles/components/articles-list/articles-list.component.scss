@@ -1,14 +1,31 @@
+.card-stats {
+  color: #90caf9;
+
+  .pi.pi-unlock {
+    color: var(--green-500);
+  }
+
+  .pi.pi-lock {
+    color: var(--pink-700);
+  }
+}
+
+.pi.pi-info-circle {
+  cursor: pointer;
+}
+
 .card-content {
-  height: 100%;
+  color: var(--text-color);
+}
+
+.card-content {
   background-size: cover;
   background-repeat: no-repeat;
-  flex-grow: 1;
+  height: 270px;
 }
 
 ::ng-deep {
-  .p-card-content {
-    display: flex;
-    height: 300px;
-    flex-direction: column;
+  .p-tooltip {
+    min-width: 300px;
   }
 }
