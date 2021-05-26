@@ -12,6 +12,7 @@ import { CreateArticleComponent } from './components/create-article/create-artic
 import { ArticleViewComponent } from './components/article-view/article-view.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { ChipModule } from 'primeng/chip';
+import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
 
 
 @NgModule({
@@ -30,7 +31,10 @@ import { ChipModule } from 'primeng/chip';
     TooltipModule,
     ChipModule
   ],
-  providers: [ArticleService],
+  providers: [
+    ArticleService,
+    {provide: CRUD_SERVICE, useExisting: ArticleService}
+  ],
 })
 export class ArticlesModule {
 }

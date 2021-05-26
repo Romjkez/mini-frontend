@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArticlesListComponent } from './components/articles-list/articles-list.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { ArticleViewComponent } from './components/article-view/article-view.component';
+import { ByIdResolver } from '../shared/resolvers/by-id.resolver';
 
 const routes: Routes = [
   {
@@ -18,6 +19,9 @@ const routes: Routes = [
   {
     path: ':id',
     component: ArticleViewComponent,
+    resolve: {
+      article: ByIdResolver,
+    }
   }
 ];
 
