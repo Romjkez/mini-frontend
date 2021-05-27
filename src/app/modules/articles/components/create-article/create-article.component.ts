@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../article.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, tap } from 'rxjs/operators';
 import * as Quill from 'quill';
+import { CreateArticleDto } from '../../dto/create-article.dto';
+import { HttpErrorResponse } from '@angular/common/http';
+import { errorToText } from '../../../../common/utils/error-to-text';
+import { TOAST_ERROR_TIME } from '../../../../common/constants';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 
 const ColorStyle = Quill.import('attributors/style/color');
@@ -25,7 +31,6 @@ Quill.register(FontStyle, true);
   selector: 'mn-create-article',
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateArticleComponent implements OnInit {
   form: FormGroup = this.fb.group({
@@ -34,11 +39,13 @@ export class CreateArticleComponent implements OnInit {
     video: this.fb.control(null),
     useVideo: this.fb.control(false),
     previewUrl: this.fb.control(null),
-    tags: this.fb.control([]),
+    tags: this.fb.control(null),
   });
 
   constructor(private readonly articleService: ArticleService,
-              private readonly fb: FormBuilder) {
+              private readonly fb: FormBuilder,
+              private readonly messageService: MessageService,
+              private readonly router: Router) {
   }
 
   ngOnInit(): void {
@@ -52,7 +59,37 @@ export class CreateArticleComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(1);
+    if (this.form.invalid) {
+      return;
+    }
+    const dto: CreateArticleDto = {
+      title: this.form.get('title').value,
+      tags: this.form.get('tags').value,
+      video: this.form.get('video').value,
+      previewUrl: this.form.get('previewUrl').value,
+      content: this.form.get('content').value
+    };
+    this.articleService.create(dto)
+      .pipe(
+        tap(article => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Статья успешно добавлена',
+            detail: `Присвоен ID: ${article.id}`
+          });
+          return this.router.navigateByUrl('/articles');
+        }),
+        catchError((err: HttpErrorResponse) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Ошибка добавления статьи',
+            detail: errorToText(err?.error?.message, err.status),
+            life: TOAST_ERROR_TIME
+          });
+          throw new HttpErrorResponse(err);
+        })
+      )
+      .subscribe();
   }
 
   getArticleContentTooltip(): string {

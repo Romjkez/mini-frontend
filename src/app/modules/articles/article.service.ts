@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { GetManyResponseDto } from '../../common/dto/get-many-response.dto';
 import { GetManyArticlesDto } from './dto/get-many-articles.dto';
+import { CreateArticleDto } from './dto/create-article.dto';
 
 @Injectable()
 export class ArticleService implements CrudService<Article> {
@@ -13,8 +14,8 @@ export class ArticleService implements CrudService<Article> {
   constructor(private readonly http: HttpClient) {
   }
 
-  create(dto: any): Observable<Article> {
-    return;
+  create(dto: CreateArticleDto): Observable<Article> {
+    return this.http.post<Article>(`${environment.apiHost}/article`, dto);
   }
 
   getById(id: number): Observable<Article> {

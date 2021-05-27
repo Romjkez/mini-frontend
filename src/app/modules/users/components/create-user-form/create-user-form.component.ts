@@ -42,7 +42,6 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
     if (this.form.invalid) {
       return;
     }

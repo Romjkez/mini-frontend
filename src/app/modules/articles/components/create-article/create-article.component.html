@@ -9,7 +9,7 @@
               <label for="title">Заголовок *</label>
             </div>
             <div class="col-sm-10">
-              <input formControlName="title" class="w-100" type="text" id="title" pInputText
+              <input required formControlName="title" class="w-100" type="text" id="title" pInputText
                      placeholder="Не менее 3 символов">
             </div>
           </div>
@@ -62,10 +62,9 @@
               <div class="col-sm-2">
                 <label for="video">Текст статьи *</label>
               </div>
-              <div class="col-sm-10" #container>
+              <div class="col-sm-10">
                 <div class="d-flex align-items-center gap-2">
-                  <p-editor class="w-100" styleClass="h-100" formControlName="content"
-                            [scrollingContainer]="container"></p-editor>
+                  <p-editor class="w-100" styleClass="h-100" formControlName="content"></p-editor>
                   <i class="pi pi-question-circle" [pTooltip]="getArticleContentTooltip()" [escape]="false"></i>
                 </div>
               </div>
@@ -73,7 +72,7 @@
           </div>
           <div class="row mt-4">
             <div class="col">
-              <button class="w-100" pButton type="submit" label="Сохранить"></button>
+              <button [disabled]="form.invalid" class="w-100" pButton type="submit" label="Сохранить"></button>
             </div>
           </div>
         </form>
