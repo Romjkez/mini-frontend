@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="row p-4">
-          <p>{{article?.content?.slice(0, 255) + '...' || article.video}}</p>
+          <p>{{(article?.content || article.video) | parseHtmlText}}</p>
         </div>
         <div class="row px-4">
           <div class="col d-flex gap-3">

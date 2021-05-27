@@ -18,6 +18,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { ChipsModule } from 'primeng/chips';
 import { EditorModule } from 'primeng/editor';
+import { ParseHtmlTextPipe } from './pipes/parse-html-text.pipe';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { EditorModule } from 'primeng/editor';
     ArticlesListComponent,
     CreateArticleComponent,
     ArticleViewComponent,
+    ParseHtmlTextPipe,
   ],
   imports: [
     CommonModule,
