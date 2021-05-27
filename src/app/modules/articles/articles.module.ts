@@ -13,6 +13,11 @@ import { ArticleViewComponent } from './components/article-view/article-view.com
 import { TooltipModule } from 'primeng/tooltip';
 import { ChipModule } from 'primeng/chip';
 import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputTextModule } from 'primeng/inputtext';
+import { ChipsModule } from 'primeng/chips';
+import { EditorModule } from 'primeng/editor';
 
 
 @NgModule({
@@ -29,7 +34,12 @@ import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
     ButtonModule,
     PaginatorModule,
     TooltipModule,
-    ChipModule
+    ChipModule,
+    ReactiveFormsModule,
+    InputSwitchModule,
+    InputTextModule,
+    ChipsModule,
+    EditorModule,
   ],
   providers: [
     ArticleService,

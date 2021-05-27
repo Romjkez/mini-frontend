@@ -12,7 +12,7 @@ const routes: Routes = [
     component: ArticlesListComponent,
   },
   {
-    path: '/create',
+    path: 'create',
     pathMatch: 'full',
     component: CreateArticleComponent,
   },
