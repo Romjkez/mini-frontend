@@ -5,12 +5,12 @@
     </div>
   </div>
 
-  <a *ngFor="let article of articles | async" [routerLink]="'articles/' + article.id" class="article row mb-4">
+  <a *ngFor="let article of articles | async" [routerLink]="'/articles/' + article.id" class="article row mb-4">
     <div class="col">
       <div class="card-content" [style.backgroundImage]="'url(\'assets/img/black.png\'), url('+article.previewUrl+')'">
         <div class="row p-4">
           <h3 class="card-title col-sm-8">{{article.title}}</h3>
-          <div class="card-stats col-sm-4 d-flex gap-4 justify-content-end align-items-center">
+          <div class="article-card-stats col-sm-4 d-flex gap-4 justify-content-end align-items-center">
             <span title="Просмотры"><i class="pi pi-eye me-2"></i>{{article.finishedBy}}</span>
             <span title="Избранное"><i class="pi pi-star me-2"></i>{{article.favoriteFor}}</span>
             <i *ngIf="article.isVisible; else isNotVisible">

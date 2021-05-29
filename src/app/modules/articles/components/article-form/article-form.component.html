@@ -5,6 +5,7 @@
     </div>
     <div class="col-sm-10">
       <input required formControlName="title" class="w-100" type="text" id="title" pInputText
+             [readOnly]="readonly"
              placeholder="Не менее 3 символов">
     </div>
   </div>
@@ -14,9 +15,9 @@
     </div>
     <div class="col-sm-10">
       <div class="d-flex align-items-center gap-2">
-        <input formControlName="previewUrl" class="w-100" type="text" id="previewUrl" pInputText
+        <input formControlName="previewUrl" class="w-100" type="text" id="previewUrl" pInputText [readOnly]="readonly"
                placeholder="Пример: https://i.imgur.com/yLiIVxG.jpg">
-        <i class="pi pi-question-circle"
+        <i *ngIf="!readonly" class="pi pi-question-circle"
            pTooltip="Укажите прямую ссылку на изображение. Рекомендуемый размер: 1500x400 пикселей"></i>
       </div>
     </div>
@@ -27,7 +28,7 @@
     </div>
     <div class="col-sm-10 d-flex align-items-center gap-2">
       <p-chips formControlName="tags" class="flex-grow-1" styleClass="w-100" id="tags" separator=","></p-chips>
-      <i class="pi pi-question-circle"
+      <i *ngIf="!readonly" class="pi pi-question-circle"
          pTooltip="Укажите от 1 до 10 ключевых слов, по которым статью можно будет найти"></i>
     </div>
   </div>
@@ -37,7 +38,7 @@
   <div class="row mt-4">
     <div class="d-flex gap-3 justify-content-center">
       <label for="useVideo">Вставить видео вместо текста</label>
-      <p-inputSwitch id="useVideo" formControlName="useVideo"></p-inputSwitch>
+      <p-inputSwitch id="useVideo" formControlName="useVideo" [readonly]="readonly"></p-inputSwitch>
     </div>
   </div>
   <div class="row mt-4">
@@ -47,8 +48,8 @@
       </div>
       <div class="col-sm-10">
         <div class="d-flex align-items-center gap-2">
-          <input formControlName="video" class="w-100" type="text" id="video" pInputText>
-          <i class="pi pi-question-circle" pTooltip="Укажите прямую ссылку на видео"></i>
+          <input formControlName="video" class="w-100" type="text" id="video" pInputText [readOnly]="readonly">
+          <i *ngIf="!readonly" class="pi pi-question-circle" pTooltip="Укажите прямую ссылку на видео"></i>
         </div>
       </div>
     </ng-container>
@@ -59,13 +60,14 @@
       </div>
       <div class="col-sm-10">
         <p-tabView>
-          <p-tabPanel header="Редактирование">
+          <p-tabPanel header="Редактирование" [disabled]="readonly">
             <div class="d-flex align-items-center gap-2">
-              <p-editor class="w-100" styleClass="h-100" formControlName="content"></p-editor>
-              <i class="pi pi-question-circle" [pTooltip]="getArticleContentTooltip()" [escape]="false"></i>
+              <p-editor class="w-100" styleClass="h-100" formControlName="content" [readonly]="readonly"></p-editor>
+              <i *ngIf="!readonly" class="pi pi-question-circle" [pTooltip]="getArticleContentTooltip()"
+                 [escape]="false"></i>
             </div>
           </p-tabPanel>
-          <p-tabPanel header="Предпросмотр">
+          <p-tabPanel header="Предпросмотр" [selected]="readonly">
             <div [innerHTML]="form.get('content').value"></div>
           </p-tabPanel>
         </p-tabView>
