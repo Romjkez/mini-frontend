@@ -59,14 +59,21 @@
             </ng-container>
 
             <ng-container *ngIf="!form.get('useVideo').value">
-              <div class="col-sm-2">
+              <div class="col-sm-2 d-flex align-items-center">
                 <label for="video">Текст статьи *</label>
               </div>
               <div class="col-sm-10">
-                <div class="d-flex align-items-center gap-2">
-                  <p-editor class="w-100" styleClass="h-100" formControlName="content"></p-editor>
-                  <i class="pi pi-question-circle" [pTooltip]="getArticleContentTooltip()" [escape]="false"></i>
-                </div>
+                <p-tabView>
+                  <p-tabPanel header="Редактирование">
+                    <div class="d-flex align-items-center gap-2">
+                      <p-editor class="w-100" styleClass="h-100" formControlName="content"></p-editor>
+                      <i class="pi pi-question-circle" [pTooltip]="getArticleContentTooltip()" [escape]="false"></i>
+                    </div>
+                  </p-tabPanel>
+                  <p-tabPanel header="Предпросмотр">
+                    <div [innerHTML]="form.get('content').value"></div>
+                  </p-tabPanel>
+                </p-tabView>
               </div>
             </ng-container>
           </div>

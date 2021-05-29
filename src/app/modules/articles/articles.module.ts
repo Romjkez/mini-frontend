@@ -19,6 +19,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ChipsModule } from 'primeng/chips';
 import { EditorModule } from 'primeng/editor';
 import { ParseHtmlTextPipe } from './pipes/parse-html-text.pipe';
+import { TabViewModule } from 'primeng/tabview';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ParseHtmlTextPipe } from './pipes/parse-html-text.pipe';
     InputTextModule,
     ChipsModule,
     EditorModule,
+    TabViewModule
   ],
   providers: [
     ArticleService,
