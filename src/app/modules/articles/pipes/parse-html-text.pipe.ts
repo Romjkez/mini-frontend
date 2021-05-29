@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Remove HTML tags from text, cut to 255 symbols
+ */
 @Pipe({
   name: 'parseHtmlText'
 })
