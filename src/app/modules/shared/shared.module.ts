@@ -4,6 +4,7 @@ import { ByIdResolver } from './resolvers/by-id.resolver';
 import { DefaultValuePipe } from './pipes/default-value.pipe';
 import { BooleanPipe } from './pipes/is-private.pipe';
 import { CreatedUpdatedDatePipe } from './pipes/created-updated-date.pipe';
+import { TagsPipe } from './pipes/tags.pipe';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { CreatedUpdatedDatePipe } from './pipes/created-updated-date.pipe';
   declarations: [
     BooleanPipe,
     DefaultValuePipe, // TODO: move to separate module when needed
-    CreatedUpdatedDatePipe,
+    CreatedUpdatedDatePipe, TagsPipe,
   ],
   providers: [
     ByIdResolver,
@@ -21,6 +22,7 @@ import { CreatedUpdatedDatePipe } from './pipes/created-updated-date.pipe';
     BooleanPipe,
     DefaultValuePipe,
     CreatedUpdatedDatePipe,
+    TagsPipe,
   ]
 })
 export class SharedModule {

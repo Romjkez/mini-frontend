@@ -7,6 +7,9 @@ import { CreateTestComponent } from './components/create-test/create-test.compon
 import { TestViewComponent } from './components/test-view/test-view.component';
 import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
 import { TestService } from './test.service';
+import { TableModule } from 'primeng/table';
+import { SharedModule } from '../shared/shared.module';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { TestService } from './test.service';
   ],
   imports: [
     CommonModule,
-    TestsRoutingModule
+    TableModule,
+    TestsRoutingModule,
+    SharedModule,
+    ButtonModule
   ],
   providers: [
     TestService,

@@ -16,14 +16,14 @@ export class TestService implements CrudService<Test> {
   }
 
   create(dto: CreateTestDto): Observable<Test> {
-    return this.http.post<Test>(`${environment.apiHost}/article`, dto);
+    return this.http.post<Test>(`${environment.apiHost}/test`, dto);
   }
 
   getById(id: number): Observable<Test> {
-    return this.http.get<Test>(`${environment.apiHost}/article/${id}`);
+    return this.http.get<Test>(`${environment.apiHost}/test/${id}`);
   }
 
   getMany<M = SimpleTest>(dto: GetManyTestsDto): Observable<GetManyResponseDto<M>> {
-    return this.http.post<GetManyResponseDto<M>>(`${environment.apiHost}/article/getMany`, dto);
+    return this.http.post<GetManyResponseDto<M>>(`${environment.apiHost}/test/getMany`, dto);
   }
 }

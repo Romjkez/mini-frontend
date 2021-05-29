@@ -1,1 +1,86 @@
-<p>tests-list works!</p>
+<div class="container-fluid" style="max-width:1500px">
+  <div class="row my-3">
+    <div class="col">
+      <a pButton label="Добавить" class="p-button-info text-decoration-none" routerLink="/tests/create"></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p-table [lazy]="true"
+               [scrollable]="true"
+               [paginator]="true"
+               [value]="tests | async"
+               [rows]="perPage"
+               [resetPageOnSort]="true"
+               [totalRecords]="totalItems | async"
+               [showCurrentPageReport]="true"
+               [currentPageReportTemplate]="currentPageReportTemplate"
+               [rowsPerPageOptions]="perPageOptions"
+               [rowHover]="true"
+               (onPage)="pageChanged($event)"
+               scrollHeight="635px"
+               styleClass="p-datatable-sm">
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col style="width:70px">
+            <col style="width:170px">
+            <col style="width:170px">
+            <col style="width:170px">
+            <col style="width:170px">
+            <col style="width:150px">
+            <col style="width:190px">
+            <col style="width:190px">
+            <col style="width:220px">
+          </colgroup>
+        </ng-template>
+
+        <!--    <ng-template pTemplate="caption">
+              <p-multiSelect [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
+                             selectedItemsLabel="{0} выбрано" [style]="{minWidth: '200px'}" placeholder="Выберите колонки">
+              </p-multiSelect>
+            </ng-template>-->
+
+        <ng-template pTemplate="header" let-columns="columns">
+          <tr>
+            <th>ID
+            </th>
+            <th>Кол-во вопросов "Один из"
+            </th>
+            <th>Кол-во вопросов "Много из"
+            </th>
+            <th>Кол-во вопросов "Точный ответ"
+            </th>
+            <th>Кол-во вопросов "Порядок"
+            </th>
+            <th pSortableColumn="isVisible">Опубликовано
+              <p-sortIcon field="isVisible"></p-sortIcon>
+            </th>
+            <th pSortableColumn="createdAt">Дата создания
+              <p-sortIcon field="createdAt"></p-sortIcon>
+            </th>
+            <th pSortableColumn="updatedAt">Дата обновления
+              <p-sortIcon field="updatedAt"></p-sortIcon>
+            </th>
+            <th>Теги
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-test let-columns="columns">
+          <tr>
+            <td>{{test.id}}</td>
+            <td>{{test.oneOfQuestions}}</td>
+            <td>{{test.manyOfQuestions}}</td>
+            <td>{{test.exactAnswerQuestions}}</td>
+            <td>{{test.orderQuestions}}</td>
+            <td>{{!test.isPrivate | boolean}}</td>
+            <td class="date-cell">{{test.createdAt | date:'dd.MM.YYYY HH:mm'}}</td>
+            <td class="date-cell">{{test.updatedAt | date:'dd.MM.YYYY HH:mm'}}</td>
+            <td>{{test.tags | tags}}</td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </div>
+  </div>
+</div>
