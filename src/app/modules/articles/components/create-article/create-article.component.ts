@@ -59,6 +59,7 @@ export class CreateArticleComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log(this.form);
     if (this.form.invalid) {
       return;
     }
@@ -90,14 +91,6 @@ export class CreateArticleComponent implements OnInit {
         })
       )
       .subscribe();
-  }
-
-  getArticleContentTooltip(): string {
-    return `
-    Подсказки при написании:
-    <ul>
-        <li>Не вставляйте большие картинки. Проверьте, чтобы их размер был не более 100Кб, а расширение - jpeg или webp. В противном случае воспользуйтесь оптимизаторами изображений или уменьшите размеры изображения</li>
-    </ul>`;
   }
 
   private switchToVideo(): void {

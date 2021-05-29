@@ -1,3 +1,16 @@
+.articles {
+  overflow-x: hidden;
+}
+
+a.article {
+  text-decoration: none;
+  transition: transform 200ms;
+
+  &:hover, &:focus {
+    transform: scale(1.01);
+  }
+}
+
 .card-stats {
   color: #90caf9;
 

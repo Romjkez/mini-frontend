@@ -20,6 +20,7 @@ import { ChipsModule } from 'primeng/chips';
 import { EditorModule } from 'primeng/editor';
 import { ParseHtmlTextPipe } from './pipes/parse-html-text.pipe';
 import { TabViewModule } from 'primeng/tabview';
+import { ArticleFormComponent } from './components/article-form/article-form.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { TabViewModule } from 'primeng/tabview';
     CreateArticleComponent,
     ArticleViewComponent,
     ParseHtmlTextPipe,
+    ArticleFormComponent,
   ],
   imports: [
     CommonModule,
