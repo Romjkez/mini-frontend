@@ -17,7 +17,10 @@
                [currentPageReportTemplate]="currentPageReportTemplate"
                [rowsPerPageOptions]="perPageOptions"
                [rowHover]="true"
+               [multiSortMeta]="multiSortMeta"
+               (onSort)="onSort($event)"
                (onPage)="pageChanged($event)"
+               sortMode="multiple"
                scrollHeight="635px"
                styleClass="p-datatable-sm">
         <ng-template pTemplate="colgroup">
