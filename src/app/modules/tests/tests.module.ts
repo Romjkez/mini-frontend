@@ -10,20 +10,34 @@ import { TestService } from './test.service';
 import { TableModule } from 'primeng/table';
 import { SharedModule } from '../shared/shared.module';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TestFormComponent } from './components/test-form/test-form.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
+import { ChipsModule } from 'primeng/chips';
+import { AccordionModule } from 'primeng/accordion';
 
 
 @NgModule({
   declarations: [
     TestsListComponent,
     CreateTestComponent,
-    TestViewComponent
+    TestViewComponent,
+    TestFormComponent
   ],
   imports: [
     CommonModule,
     TableModule,
     TestsRoutingModule,
     SharedModule,
-    ButtonModule
+    ButtonModule,
+    CardModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    TooltipModule,
+    ChipsModule,
+    AccordionModule,
   ],
   providers: [
     TestService,
