@@ -19,10 +19,7 @@ export class CreateTestComponent implements OnInit {
       title: this.fb.control(null, [Validators.required, Validators.minLength(3)]),
       previewUrl: this.fb.control(null),
       tags: this.fb.control(null, [Validators.required]),
-      oneOfQuestions: this.fb.array([]),
-      manyOfQuestions: this.fb.array([]),
-      exactAnswerQuestions: this.fb.array([]),
-      orderQuestions: this.fb.array([]),
+      questions: this.fb.array([], [Validators.required]),
     });
   }
 

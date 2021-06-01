@@ -35,29 +35,34 @@
   <div class="row">
     <small class="offset-sm-2 hint">Используйте запятую в качестве разделителя</small>
   </div>
+  <div class="row">
+    <h4 class="text-center mt-4">Вопросы</h4>
+  </div>
   <p-accordion [multiple]="true">
-    <div class="row">
-      <p-accordionTab [header]='"Вопросы «Один из» | "+oneOfQuestions.controls.length'>
-        Content 1
+    <div *ngFor="let question of questions.controls; let i = index" class="row align-items-center"
+         formArrayName="questions">
+      <p-accordionTab class="col-sm-11" [header]='question | questionTitle:i+1'>
+        <ng-container [ngSwitch]="question.get('type').value" [formGroupName]="i">
+          <mn-many-of-question-form *ngSwitchCase="'multipleOf'"></mn-many-of-question-form>
+          <mn-order-question-form *ngSwitchCase="'order'"></mn-order-question-form>
+          <mn-exact-answer-question-form *ngSwitchCase="'exactAnswer'"></mn-exact-answer-question-form>
+          <mn-one-of-question-form *ngSwitchCase="'oneOf'"></mn-one-of-question-form>
+          <mn-one-of-question-form *ngSwitchDefault></mn-one-of-question-form>
+        </ng-container>
       </p-accordionTab>
-    </div>
 
-    <div class="row">
-      <p-accordionTab [header]='"Вопросы «Много из» | "+manyOfQuestions.controls.length'>
-        Content 2
-      </p-accordionTab>
-    </div>
-
-    <div class="row">
-      <p-accordionTab [header]='"Вопросы «Порядок» | "+orderQuestions.controls.length'>
-        Content 3
-      </p-accordionTab>
-    </div>
-
-    <div class="row">
-      <p-accordionTab [header]='"Вопросы «Точный ответ» | "+exactAnswerQuestions.controls.length'>
-        Content 4
-      </p-accordionTab>
+      <div *ngIf="i!==0" class="col-sm-1">
+        <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
+                title="Удалить вопрос"
+                (click)="questions.removeAt(i)">
+        </button>
+      </div>
     </div>
   </p-accordion>
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <p-splitButton [model]="addQuestionBtnItems" (onClick)="addQuestion()" label="Добавить вопрос" icon="pi pi-plus"
+                     styleClass="p-button-secondary"></p-splitButton>
+    </div>
+  </div>
 </form>

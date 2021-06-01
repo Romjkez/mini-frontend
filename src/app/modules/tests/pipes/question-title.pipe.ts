@@ -6,7 +6,11 @@ import { AbstractControl } from '@angular/forms';
   pure: false,
 })
 export class QuestionTitlePipe implements PipeTransform {
-  transform(control: AbstractControl): string {
-    return `${control.get('order').value}. ${control.get('text').value ?? '<Новый вопрос>'}`;
+  transform(control: AbstractControl, order: number): string {
+    return `${order}. ${getQuestionText(control.get('text').value)}`;
   }
+}
+
+function getQuestionText(text: string): string {
+  return text === undefined || text === null || text === '' ? '<Новый вопрос>' : text;
 }
