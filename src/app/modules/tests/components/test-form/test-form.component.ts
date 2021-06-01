@@ -18,7 +18,6 @@ export class TestFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.form);
     this.questions = this.form.get('questions') as FormArray;
 
     this.addQuestionBtnItems = [
@@ -52,7 +51,6 @@ export class TestFormComponent implements OnInit {
         this.questions.push(this.fb.group({
           text: this.fb.control(null, Validators.required),
           type: this.fb.control(QuestionType.MultipleOf, Validators.required),
-          answer: this.fb.array([], Validators.required),
           options: this.fb.array([], Validators.required),
           order: this.fb.control(null, [Validators.min(1)])
         }));
@@ -62,8 +60,13 @@ export class TestFormComponent implements OnInit {
         this.questions.push(this.fb.group({
           text: this.fb.control(null, Validators.required),
           type: this.fb.control(QuestionType.Order, Validators.required),
-          answer: this.fb.array([], Validators.required),
-          options: this.fb.array([], Validators.required),
+          options: this.fb.array([
+            this.fb.group({
+              isCorrect: this.fb.control(null, Validators.required),
+              text: this.fb.control(null, Validators.required),
+              order: this.fb.control(null, Validators.required)
+            })
+          ], Validators.required),
           order: this.fb.control(null, [Validators.min(1)])
         }));
         break;
@@ -73,37 +76,16 @@ export class TestFormComponent implements OnInit {
         this.questions.push(this.fb.group({
           text: this.fb.control(null, Validators.required),
           type: this.fb.control(QuestionType.OneOf, Validators.required),
-          answer: this.fb.control(null, Validators.required),
-          options: this.fb.array([], Validators.required),
+          options: this.fb.array([
+            this.fb.group({
+              isCorrect: this.fb.control(null, Validators.required),
+              text: this.fb.control(null, Validators.required),
+            })
+          ], Validators.required),
           order: this.fb.control(null, [Validators.min(1)])
         }));
     }
     this.form.updateValueAndValidity();
   }
 
-  addOneOfQuestion(): void {
-
-  }
-
-  addManyOfQuestion(): void {
-
-  }
-
-  addOrderQuestion(): void {
-
-  }
-
-  /* addExactAnswerQuestion(): void {
-     this.exactAnswerQuestions.push(this.fb.group({
-       text: this.fb.control(null, Validators.required),
-       answer: this.fb.control(null, Validators.required),
-       order: this.fb.control(this.calculateOrderNumber(), [Validators.required, Validators.min(1)])
-     }));
-     this.form.updateValueAndValidity();
-   }
-
-   calculateOrderNumber(): number {
-     return this.exactAnswerQuestions.controls.length + this.oneOfQuestions.controls.length + this.manyOfQuestions.controls.length
-       + this.orderQuestions.controls.length + 1;
-   }*/
 }

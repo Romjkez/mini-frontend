@@ -23,6 +23,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { QuestionTitlePipe } from './pipes/question-title.pipe';
 import { ManyOfQuestionFormComponent } from './components/questions/many-of-question-form/many-of-question-form.component';
 import { OrderQuestionFormComponent } from './components/questions/order-question-form/order-question-form.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { OrderQuestionFormComponent } from './components/questions/order-questio
     ChipsModule,
     AccordionModule,
     SplitButtonModule,
+    ToggleButtonModule,
   ],
   providers: [
     TestService,
