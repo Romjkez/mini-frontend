@@ -61,7 +61,8 @@
   </p-accordion>
   <div class="row">
     <div class="col d-flex justify-content-center">
-      <p-splitButton [model]="addQuestionBtnItems" (onClick)="addQuestion()" label="Добавить вопрос" icon="pi pi-plus"
+      <p-splitButton [disabled]="questions.length > 9" [model]="addQuestionBtnItems" (onClick)="addQuestion()"
+                     label="Добавить вопрос" icon="pi pi-plus"
                      styleClass="p-button-secondary"></p-splitButton>
     </div>
   </div>
