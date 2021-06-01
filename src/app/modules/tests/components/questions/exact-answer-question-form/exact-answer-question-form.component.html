@@ -1,0 +1,20 @@
+<div class="row mb-4">
+  <div class="col-sm-2">
+    <label [for]="'text'+controlContainer.name">Текст вопроса *</label>
+  </div>
+  <div class="col-sm-10">
+    <input required formControlName="text" class="w-100" type="text" [id]="'text'+controlContainer.name" pInputText
+           [readOnly]="readonly"
+           placeholder="Не менее 3 символов">
+  </div>
+</div>
+<div class="row mb-4">
+  <div class="col-sm-2">
+    <label [for]="'answer'+controlContainer.name">Правильный ответ *</label>
+  </div>
+  <div class="col-sm-10">
+    <input required formControlName="answer" class="w-100" type="text" [id]="'answer'+controlContainer.name" pInputText
+           [readOnly]="readonly">
+  </div>
+</div>
+<hr>

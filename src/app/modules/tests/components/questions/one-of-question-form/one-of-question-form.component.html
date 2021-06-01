@@ -1,0 +1,30 @@
+<div class="row mb-4">
+  <div class="col-sm-2">
+    <label [for]="'text'+controlContainer.name">Текст вопроса *</label>
+  </div>
+  <div class="col-sm-10">
+    <input required formControlName="text" class="w-100" type="text" [id]="'text'+controlContainer.name" pInputText
+           [readOnly]="readonly"
+           placeholder="Не менее 3 символов">
+  </div>
+</div>
+<div class="row mb-4">
+  <div class="col-sm-2">
+    <label [for]="'answer'+controlContainer.name">Правильный ответ *</label>
+  </div>
+  <div class="col-sm-10">
+    <input required formControlName="answer" class="w-100" type="text" [id]="'answer'+controlContainer.name" pInputText
+           [readOnly]="readonly">
+  </div>
+</div>
+<div class="row mb-4">
+  <div class="col-sm-2">
+    <label [for]="'options'+controlContainer.name">Варианты ответов *</label>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <!--<input required formControlName="options" class="w-100" type="text" [id]="'options'+controlContainer.name" pInputText
+           [readOnly]="true">-->
+    <i *ngIf="!readonly" class="pi pi-question-circle" pTooltip="Правильный ответ включать в этот список не нужно"></i>
+  </div>
+</div>
+<hr>

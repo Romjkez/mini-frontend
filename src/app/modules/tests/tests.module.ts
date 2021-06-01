@@ -17,6 +17,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
 import { ChipsModule } from 'primeng/chips';
 import { AccordionModule } from 'primeng/accordion';
+import { ExactAnswerQuestionFormComponent } from './components/questions/exact-answer-question-form/exact-answer-question-form.component';
+import { OneOfQuestionFormComponent } from './components/questions/one-of-question-form/one-of-question-form.component';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { QuestionTitlePipe } from './pipes/question-title.pipe';
+import { ManyOfQuestionFormComponent } from './components/questions/many-of-question-form/many-of-question-form.component';
+import { OrderQuestionFormComponent } from './components/questions/order-question-form/order-question-form.component';
 
 
 @NgModule({
@@ -24,7 +30,12 @@ import { AccordionModule } from 'primeng/accordion';
     TestsListComponent,
     CreateTestComponent,
     TestViewComponent,
-    TestFormComponent
+    TestFormComponent,
+    ExactAnswerQuestionFormComponent,
+    OneOfQuestionFormComponent,
+    QuestionTitlePipe,
+    ManyOfQuestionFormComponent,
+    OrderQuestionFormComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +49,7 @@ import { AccordionModule } from 'primeng/accordion';
     TooltipModule,
     ChipsModule,
     AccordionModule,
+    SplitButtonModule,
   ],
   providers: [
     TestService,
