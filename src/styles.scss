@@ -69,3 +69,18 @@ body {
     color: var(--pink-700);
   }
 }
+
+.btn-correct {
+  background-color: #C5E1A5 !important;
+
+  span.p-button-icon {
+    color: var(--surface-b) !important;
+  }
+}
+
+.btn-incorrect {
+  background-color: #EF9A9A !important;
+}
+
+
+

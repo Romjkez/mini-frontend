@@ -22,7 +22,7 @@
                         [styleClass]="option.get('isCorrect').value ? 'btn-correct' : 'btn-incorrect'"></p-toggleButton>
         <input formControlName="text" required class="col-sm-8 p-inputtext-sm" type="text" pInputText
                [readOnly]="readonly">
-        <button *ngIf="i!==0" pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm col-sm-2"
+        <button *ngIf="i>1" pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm col-sm-2"
                 title="Удалить вариант ответа"
                 (click)="onDeleteOption(i)">
         </button>

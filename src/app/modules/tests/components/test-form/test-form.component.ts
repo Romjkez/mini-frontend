@@ -51,7 +51,16 @@ export class TestFormComponent implements OnInit {
         this.questions.push(this.fb.group({
           text: this.fb.control(null, Validators.required),
           type: this.fb.control(QuestionType.MultipleOf, Validators.required),
-          options: this.fb.array([], Validators.required),
+          options: this.fb.array([
+            this.fb.group({
+              isCorrect: this.fb.control(null, Validators.required),
+              text: this.fb.control(null, Validators.required),
+            }),
+            this.fb.group({
+              isCorrect: this.fb.control(null, Validators.required),
+              text: this.fb.control(null, Validators.required),
+            })
+          ], Validators.required),
           order: this.fb.control(null, [Validators.min(1)])
         }));
         break;
@@ -61,6 +70,11 @@ export class TestFormComponent implements OnInit {
           text: this.fb.control(null, Validators.required),
           type: this.fb.control(QuestionType.Order, Validators.required),
           options: this.fb.array([
+            this.fb.group({
+              isCorrect: this.fb.control(null, Validators.required),
+              text: this.fb.control(null, Validators.required),
+              order: this.fb.control(null, Validators.required)
+            }),
             this.fb.group({
               isCorrect: this.fb.control(null, Validators.required),
               text: this.fb.control(null, Validators.required),
@@ -77,6 +91,10 @@ export class TestFormComponent implements OnInit {
           text: this.fb.control(null, Validators.required),
           type: this.fb.control(QuestionType.OneOf, Validators.required),
           options: this.fb.array([
+            this.fb.group({
+              isCorrect: this.fb.control(null, Validators.required),
+              text: this.fb.control(null, Validators.required),
+            }),
             this.fb.group({
               isCorrect: this.fb.control(null, Validators.required),
               text: this.fb.control(null, Validators.required),

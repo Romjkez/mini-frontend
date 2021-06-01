@@ -1,1 +1,36 @@
-<p>many-of-question-form works!</p>
+<div class="row mb-4">
+  <div class="col-sm-2">
+    <label [for]="'text'+controlContainer.name">Текст вопроса *</label>
+  </div>
+  <div class="col-sm-10">
+    <input required formControlName="text" class="w-100" type="text" [id]="'text'+controlContainer.name" pInputText
+           [readOnly]="readonly"
+           placeholder="Не менее 3 символов">
+  </div>
+</div>
+<div class="row mb-4">
+  <div class="col-sm-2">
+    <label [for]="'options'+controlContainer.name">Варианты ответов *</label>
+  </div>
+  <div class="col-sm-10 row align-items-center" formArrayName="options">
+    <div class="col-sm-11">
+      <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i"
+           class="row gap-2 mb-2 align-items-center">
+        <p-toggleButton formControlName="isCorrect" onIcon="pi pi-check" offIcon="pi pi-times" class="col-sm-2"
+                        [title]="option.get('isCorrect').value ? 'Верный ответ' : 'Неверный ответ'"
+                        [styleClass]="option.get('isCorrect').value ? 'btn-correct' : 'btn-incorrect'"></p-toggleButton>
+        <input formControlName="text" required class="col-sm-8 p-inputtext-sm" type="text" pInputText
+               [readOnly]="readonly">
+        <button *ngIf="i>1" pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm col-sm-2"
+                title="Удалить вариант ответа"
+                (click)="options.removeAt(i)">
+        </button>
+      </div>
+      <button [disabled]="options.length > 5" class="mt-2 p-button-info w-100" type="button" label="Добавить вариант"
+              (click)="addOption()"
+              pButton></button>
+    </div>
+    <i *ngIf="!readonly" class="col-sm-1 pi pi-question-circle" pTooltip="Не более 6 вариантов ответов"></i>
+  </div>
+</div>
+<hr>
