@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
+import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupName, Validators } from '@angular/forms';
 
 @Component({
   selector: 'mn-one-of-question-form',
@@ -25,8 +25,11 @@ export class OneOfQuestionFormComponent implements OnInit {
 
   addOption(): void {
     this.options.push(this.fb.group({
-      isCorrect: this.fb.control({value: false, disabled: this.options.controls.some(c => c.get('isCorrect').value === true)}),
-      text: this.fb.control(null),
+      isCorrect: this.fb.control({
+        value: false,
+        disabled: this.options.controls.some(c => c.get('isCorrect').value === true)
+      }, Validators.required),
+      text: this.fb.control(null, Validators.required),
     }));
     this.cdr.detectChanges();
   }

@@ -34,12 +34,6 @@ export class TestFormComponent implements OnInit {
         command: this.addQuestion.bind(this, QuestionType.ExactAnswer)
       },
     ];
-
-    this.form.valueChanges.subscribe(e => {
-      console.log(e);
-      console.log(this.form);
-      console.log('--------------------------------');
-    });
   }
 
   addQuestion(questionType: QuestionType = QuestionType.OneOf): void {
@@ -58,11 +52,11 @@ export class TestFormComponent implements OnInit {
           type: this.fb.control(QuestionType.MultipleOf, Validators.required),
           options: this.fb.array([
             this.fb.group({
-              isCorrect: this.fb.control(null, Validators.required),
+              isCorrect: this.fb.control(false, Validators.required),
               text: this.fb.control(null, Validators.required),
             }),
             this.fb.group({
-              isCorrect: this.fb.control(null, Validators.required),
+              isCorrect: this.fb.control(false, Validators.required),
               text: this.fb.control(null, Validators.required),
             })
           ], Validators.required),
@@ -91,11 +85,11 @@ export class TestFormComponent implements OnInit {
           type: this.fb.control(QuestionType.OneOf, Validators.required),
           options: this.fb.array([
             this.fb.group({
-              isCorrect: this.fb.control(null, Validators.required),
+              isCorrect: this.fb.control(false, Validators.required),
               text: this.fb.control(null, Validators.required),
             }),
             this.fb.group({
-              isCorrect: this.fb.control(null, Validators.required),
+              isCorrect: this.fb.control(false, Validators.required),
               text: this.fb.control(null, Validators.required),
             })
           ], Validators.required),
