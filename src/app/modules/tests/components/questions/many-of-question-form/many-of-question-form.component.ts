@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,8 @@ export class ManyOfQuestionFormComponent implements OnInit {
   options: FormArray;
 
   constructor(public readonly controlContainer: ControlContainer,
-              private readonly fb: FormBuilder) {
+              private readonly fb: FormBuilder,
+              private readonly cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -24,9 +25,10 @@ export class ManyOfQuestionFormComponent implements OnInit {
 
   addOption(): void {
     this.options.push(this.fb.group({
-      isCorrect: this.fb.control(null),
+      isCorrect: this.fb.control(false),
       text: this.fb.control(null),
     }));
+    this.cdr.detectChanges();
   }
 
 }

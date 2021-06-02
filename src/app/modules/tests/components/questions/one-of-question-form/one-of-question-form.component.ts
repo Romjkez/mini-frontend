@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,8 @@ export class OneOfQuestionFormComponent implements OnInit {
   options: FormArray;
 
   constructor(public readonly controlContainer: ControlContainer,
-              private readonly fb: FormBuilder) {
+              private readonly fb: FormBuilder,
+              private readonly cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -24,9 +25,10 @@ export class OneOfQuestionFormComponent implements OnInit {
 
   addOption(): void {
     this.options.push(this.fb.group({
-      isCorrect: this.fb.control(null),
+      isCorrect: this.fb.control({value: false, disabled: this.options.controls.some(c => c.get('isCorrect').value === true)}),
       text: this.fb.control(null),
     }));
+    this.cdr.detectChanges();
   }
 
   onCorrectAnswerChange(state: boolean): void {
@@ -38,6 +40,7 @@ export class OneOfQuestionFormComponent implements OnInit {
       });
     }
     this.options.controls.forEach(control => control.get('isCorrect').enable());
+    this.cdr.detectChanges();
   }
 
   onDeleteOption(index: number): void {

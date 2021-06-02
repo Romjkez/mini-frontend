@@ -34,6 +34,12 @@ export class TestFormComponent implements OnInit {
         command: this.addQuestion.bind(this, QuestionType.ExactAnswer)
       },
     ];
+
+    this.form.valueChanges.subscribe(e => {
+      console.log(e);
+      console.log(this.form);
+      console.log('--------------------------------');
+    });
   }
 
   addQuestion(questionType: QuestionType = QuestionType.OneOf): void {
@@ -43,7 +49,6 @@ export class TestFormComponent implements OnInit {
           text: this.fb.control(null, Validators.required),
           type: this.fb.control(QuestionType.ExactAnswer, Validators.required),
           answer: this.fb.control(null, Validators.required),
-          order: this.fb.control(null, [Validators.min(1)])
         }));
         break;
       }
@@ -61,7 +66,6 @@ export class TestFormComponent implements OnInit {
               text: this.fb.control(null, Validators.required),
             })
           ], Validators.required),
-          order: this.fb.control(null, [Validators.min(1)])
         }));
         break;
       }
@@ -71,17 +75,12 @@ export class TestFormComponent implements OnInit {
           type: this.fb.control(QuestionType.Order, Validators.required),
           options: this.fb.array([
             this.fb.group({
-              isCorrect: this.fb.control(null, Validators.required),
               text: this.fb.control(null, Validators.required),
-              order: this.fb.control(null, Validators.required)
             }),
             this.fb.group({
-              isCorrect: this.fb.control(null, Validators.required),
               text: this.fb.control(null, Validators.required),
-              order: this.fb.control(null, Validators.required)
             })
           ], Validators.required),
-          order: this.fb.control(null, [Validators.min(1)])
         }));
         break;
       }
@@ -100,7 +99,6 @@ export class TestFormComponent implements OnInit {
               text: this.fb.control(null, Validators.required),
             })
           ], Validators.required),
-          order: this.fb.control(null, [Validators.min(1)])
         }));
     }
     this.form.updateValueAndValidity();
