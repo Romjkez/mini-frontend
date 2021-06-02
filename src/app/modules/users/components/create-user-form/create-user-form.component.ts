@@ -34,10 +34,10 @@ export class CreateUserFormComponent implements OnInit {
 
   addUser(): void {
     this.users.push(this.fb.group({
-      firstName: this.fb.control('Ivan', [Validators.required, Validators.minLength(2)]),
-      lastName: this.fb.control('Ivanov', [Validators.required, Validators.minLength(2)]),
-      email: this.fb.control('ivanov@mail.ru', [Validators.required, Validators.email]),
-      company: this.fb.control('Avilon', [Validators.minLength(2)]),
+      firstName: this.fb.control(null, [Validators.required, Validators.minLength(2)]),
+      lastName: this.fb.control(null, [Validators.required, Validators.minLength(2)]),
+      email: this.fb.control(null, [Validators.required, Validators.email]),
+      company: this.fb.control(null, [Validators.minLength(2)]),
     }));
   }
 

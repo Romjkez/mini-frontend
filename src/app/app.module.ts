@@ -16,6 +16,7 @@ import { NotFoundPageComponent } from './common/components/not-found-page/not-fo
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { AuthInterceptor } from './modules/auth/interceptors/auth.interceptor';
+import { RippleModule } from 'primeng/ripple';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AuthInterceptor } from './modules/auth/interceptors/auth.interceptor';
     ButtonModule,
     CardModule,
     ToastModule,
+    RippleModule,
   ],
   providers: [
     MessageService,
