@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
 
 @Component({
   selector: 'mn-one-of-question-form',
   templateUrl: './one-of-question-form.component.html',
   styleUrls: ['./one-of-question-form.component.scss'],
-  viewProviders: [{provide: ControlContainer, useExisting: FormGroupName}]
+  viewProviders: [{provide: ControlContainer, useExisting: FormGroupName}],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OneOfQuestionFormComponent implements OnInit {
   @Input() readonly: boolean;
