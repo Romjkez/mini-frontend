@@ -1,0 +1,32 @@
+.articles {
+  overflow-x: hidden;
+}
+
+a.article {
+  text-decoration: none;
+  transition: transform 200ms;
+
+  &:hover, &:focus {
+    transform: scale(1.01);
+  }
+}
+
+.pi.pi-info-circle {
+  cursor: pointer;
+}
+
+.card-content {
+  color: var(--text-color);
+}
+
+.card-content {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 270px;
+}
+
+::ng-deep {
+  .p-tooltip {
+    min-width: 300px;
+  }
+}

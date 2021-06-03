@@ -1,1 +1,40 @@
-<p>articles-list works!</p>
+<div class="articles container-fluid" style="max-width: 1500px;">
+  <div class="row my-3">
+    <div class="col">
+      <a pButton label="Добавить" class="p-button-info text-decoration-none" routerLink="/articles/create"></a>
+    </div>
+  </div>
+
+  <a *ngFor="let article of articles | async" [routerLink]="'/articles/' + article.id" class="article row mb-4">
+    <div class="col">
+      <div class="card-content" [style.backgroundImage]="'url(\'assets/img/black.png\'), url('+article.previewUrl+')'">
+        <div class="row p-4">
+          <h3 class="card-title col-sm-8">{{article.title}}</h3>
+          <div class="article-card-stats col-sm-4 d-flex gap-4 justify-content-end align-items-center">
+            <span title="Просмотры"><i class="pi pi-eye me-2"></i>{{article.finishedBy}}</span>
+            <span title="Избранное"><i class="pi pi-star me-2"></i>{{article.favoriteFor}}</span>
+            <i *ngIf="article.isVisible; else isNotVisible">
+              <i class="pi pi-unlock" title="Опубликовано"></i>
+            </i>
+            <ng-template #isNotVisible>
+              <i class="pi pi-lock" title="Скрыто от пользователей"></i>
+            </ng-template>
+            <i class="pi pi-info-circle" [pTooltip]="article | createdUpdatedDate" [escape]="false"></i>
+          </div>
+        </div>
+        <div class="row p-4">
+          <p>{{(article.content || article.video) | parseHtmlText}}</p>
+        </div>
+        <div class="row px-4">
+          <div class="col d-flex gap-3">
+            <p-chip *ngFor="let tag of article.tags" [label]="tag.text"></p-chip>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <p-paginator [totalRecords]="totalItems | async" [rows]="perPage" [rowsPerPageOptions]="perPageOptions"
+               (onPageChange)="pageChanged($event)">
+  </p-paginator>
+</div>

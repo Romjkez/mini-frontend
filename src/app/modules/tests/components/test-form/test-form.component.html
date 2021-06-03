@@ -1,0 +1,72 @@
+<form [formGroup]="form" class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <label for="title">Заголовок *</label>
+    </div>
+    <div class="col-sm-10">
+      <input required formControlName="title" class="w-100" type="text" id="title" pInputText
+             [readOnly]="readonly"
+             placeholder="Не менее 3 символов">
+    </div>
+  </div>
+  <div class="row align-items-center mt-4">
+    <div class="col-sm-2">
+      <label for="previewUrl">Ссылка на превью</label>
+    </div>
+    <div class="col-sm-10">
+      <div class="d-flex align-items-center gap-2">
+        <input formControlName="previewUrl" class="w-100" type="text" id="previewUrl" pInputText [readOnly]="readonly"
+               placeholder="Пример: https://i.imgur.com/yLiIVxG.jpg">
+        <i *ngIf="!readonly" class="pi pi-question-circle"
+           pTooltip="Укажите прямую ссылку на изображение. Рекомендуемый размер: 1500x400 пикселей"></i>
+      </div>
+    </div>
+  </div>
+  <div class="row align-items-center mt-4">
+    <div class="col-sm-2 d-flex align-items-center">
+      <label for="tags">Теги *</label>
+    </div>
+    <div class="col-sm-10 d-flex align-items-center gap-2">
+      <p-chips formControlName="tags" class="flex-grow-1" styleClass="w-100" id="tags" separator=","></p-chips>
+      <i *ngIf="!readonly" class="pi pi-question-circle"
+         pTooltip="Укажите от 1 до 10 ключевых слов, по которым статью можно будет найти"></i>
+    </div>
+  </div>
+  <div class="row">
+    <small class="offset-sm-2 hint">Используйте запятую в качестве разделителя</small>
+  </div>
+  <div class="row">
+    <h4 class="text-center mt-4">Вопросы</h4>
+  </div>
+  <p-accordion [multiple]="true">
+    <div *ngFor="let question of questions.controls; let i = index" class="row align-items-center"
+         formArrayName="questions">
+      <p-accordionTab [ngClass]="readonly ? 'col-12' : 'col-sm-11'" [header]='question | questionTitle:i+1'>
+        <ng-container [ngSwitch]="question.get('type').value" [formGroupName]="i">
+          <mn-many-of-question-form *ngSwitchCase="'multipleOf'" [readonly]="readonly"></mn-many-of-question-form>
+          <mn-order-question-form *ngSwitchCase="'order'" [readonly]="readonly"></mn-order-question-form>
+          <mn-exact-answer-question-form *ngSwitchCase="'exactAnswer'"
+                                         [readonly]="readonly"></mn-exact-answer-question-form>
+          <mn-one-of-question-form *ngSwitchCase="'oneOf'" [readonly]="readonly"></mn-one-of-question-form>
+          <mn-one-of-question-form *ngSwitchDefault [readonly]="readonly"></mn-one-of-question-form>
+        </ng-container>
+      </p-accordionTab>
+
+      <div *ngIf="!readonly" class="col-sm-1">
+        <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
+                title="Удалить вопрос"
+                [disabled]="readonly"
+                (click)="questions.removeAt(i)">
+        </button>
+      </div>
+    </div>
+  </p-accordion>
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <p-splitButton *ngIf="!readonly" [disabled]="questions.length > 9" [model]="addQuestionBtnItems"
+                     (onClick)="addQuestion()"
+                     label="Добавить вопрос" icon="pi pi-plus"
+                     styleClass="p-button-secondary"></p-splitButton>
+    </div>
+  </div>
+</form>

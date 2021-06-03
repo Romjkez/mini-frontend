@@ -30,6 +30,14 @@ export class AuthService {
     return (jwtDecode(accessToken) as JwtPayload).exp * 1000 > Date.now();
   }
 
+  getPayload(): JwtPayload | null {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      return null;
+    }
+    return jwtDecode(accessToken);
+  }
+
   getTokens(): TokensDto | null {
     if (!this.isAuthorized()) {
       return null;

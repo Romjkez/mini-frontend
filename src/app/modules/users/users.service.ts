@@ -7,10 +7,10 @@ import { SimpleUser } from './models/simple-user.model';
 import { GetManyUsersDto } from './dto/get-many-users.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './models/user.model';
-import { GetByIdService } from '../../common/models/get-by-id.service';
+import { CrudService } from '../../common/models/crud.service';
 
 @Injectable()
-export class UsersService implements GetByIdService<User> {
+export class UsersService implements CrudService<User> {
 
   constructor(private readonly http: HttpClient) {
   }
@@ -19,8 +19,8 @@ export class UsersService implements GetByIdService<User> {
     return this.http.get<User>(`${environment.apiHost}/user/${id}`);
   }
 
-  getList(dto: GetManyUsersDto): Observable<GetManyResponseDto<SimpleUser>> {
-    return this.http.post<GetManyResponseDto<SimpleUser>>(`${environment.apiHost}/user/getMany`, dto);
+  getMany<M = SimpleUser>(dto: GetManyUsersDto): Observable<GetManyResponseDto<M>> {
+    return this.http.post<GetManyResponseDto<M>>(`${environment.apiHost}/user/getMany`, dto);
   }
 
   create(dto: CreateUserDto): Observable<User> {

@@ -52,3 +52,35 @@ body {
   height: 4rem !important;
   width: 4rem !important;
 }
+
+.hint {
+  color: var(--blue-100);
+  opacity: .55;
+}
+
+.article-card-stats {
+  color: #90caf9;
+
+  .pi.pi-unlock {
+    color: var(--green-500);
+  }
+
+  .pi.pi-lock {
+    color: var(--pink-700);
+  }
+}
+
+.btn-correct {
+  background-color: #C5E1A5 !important;
+
+  span.p-button-icon {
+    color: var(--surface-b) !important;
+  }
+}
+
+.btn-incorrect {
+  background-color: #EF9A9A !important;
+}
+
+
+

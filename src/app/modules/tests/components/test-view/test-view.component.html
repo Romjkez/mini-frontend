@@ -1,0 +1,13 @@
+<div class="container" style="max-width: 800px">
+  <div class="row my-5">
+    <div class="col">
+      <p-card>
+        <h1 class="h2 text-center">Тест #{{test.id}}</h1>
+        <form [formGroup]="form" class="mt-4 container">
+          <mn-test-form [form]="form" [readonly]="true"></mn-test-form>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>
+

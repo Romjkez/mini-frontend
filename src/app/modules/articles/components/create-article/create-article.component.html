@@ -1,0 +1,17 @@
+<div class="container" style="max-width: 800px">
+  <div class="row my-5">
+    <div class="col">
+      <p-card>
+        <h1 class="h2 text-center mb-4">Добавление статьи</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4 container">
+          <mn-article-form [form]="form"></mn-article-form>
+          <div class="row mt-4">
+            <div class="col">
+              <button [disabled]="form.invalid" class="w-100" pButton type="submit" label="Сохранить"></button>
+            </div>
+          </div>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>
