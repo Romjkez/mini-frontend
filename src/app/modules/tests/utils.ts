@@ -73,7 +73,7 @@ function ofQuestionOptionsToForm(options: Array<Option>): FormArray {
 }
 
 function orderQuestionOptionsToForm(options: Array<Option>): FormArray {
-  return new FormArray(options.map(opt => new FormGroup({
+  return new FormArray(options.sort((a, b) => a.order - b.order).map(opt => new FormGroup({
     text: new FormControl(opt.text, Validators.required)
   })), Validators.required);
 }
