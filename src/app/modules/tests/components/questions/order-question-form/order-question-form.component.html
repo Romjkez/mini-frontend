@@ -17,14 +17,17 @@
       <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i"
            class="row gap-2 mb-2 align-items-center">
         <span class="col-sm-2">{{i + 1}}.</span>
-        <input formControlName="text" required class="col-sm-8 p-inputtext-sm" type="text" pInputText
+        <input formControlName="text" required class="p-inputtext-sm" [ngClass]="readonly ? 'col-sm-9':'col-sm-8'"
+               type="text" pInputText
                [readOnly]="readonly">
-        <button *ngIf="i>1" pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm col-sm-2"
+        <button *ngIf="!readonly && i>1" pButton type="button" icon="pi pi-times"
+                class="p-button-danger p-button-sm col-sm-2"
                 title="Удалить вариант ответа"
                 (click)="options.removeAt(i)">
         </button>
       </div>
-      <button [disabled]="options.length > 5" class="mt-2 p-button-info w-100" type="button" label="Добавить вариант"
+      <button *ngIf="!readonly" [disabled]="options.length > 5" class="mt-2 p-button-info w-100" type="button"
+              label="Добавить вариант"
               (click)="addOption()"
               pButton></button>
     </div>

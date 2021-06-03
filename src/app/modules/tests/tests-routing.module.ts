@@ -21,7 +21,7 @@ const routes: Routes = [
     pathMatch: 'full',
     component: TestViewComponent,
     resolve: {
-      user: ByIdResolver,
+      test: ByIdResolver,
     }
   },
 ];

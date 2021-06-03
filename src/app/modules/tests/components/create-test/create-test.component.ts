@@ -47,7 +47,6 @@ export class CreateTestComponent implements OnInit {
     }
 
     const dto: CreateTestDto = this.buildCreateTestDto();
-    console.log(dto);
     this.testService.create(dto)
       .pipe(
         tap(user => {

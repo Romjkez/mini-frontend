@@ -21,6 +21,9 @@ export class ManyOfQuestionFormComponent implements OnInit {
   ngOnInit(): void {
     this.form = (this.controlContainer as FormGroupName).control;
     this.options = this.form.get('options') as FormArray;
+    if (this.readonly) {
+      this.options.controls.forEach(c => c.get('isCorrect').disable());
+    }
   }
 
   addOption(): void {

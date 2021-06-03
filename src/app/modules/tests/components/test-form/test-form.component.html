@@ -41,19 +41,21 @@
   <p-accordion [multiple]="true">
     <div *ngFor="let question of questions.controls; let i = index" class="row align-items-center"
          formArrayName="questions">
-      <p-accordionTab class="col-sm-11" [header]='question | questionTitle:i+1'>
+      <p-accordionTab [ngClass]="readonly ? 'col-12' : 'col-sm-11'" [header]='question | questionTitle:i+1'>
         <ng-container [ngSwitch]="question.get('type').value" [formGroupName]="i">
-          <mn-many-of-question-form *ngSwitchCase="'multipleOf'"></mn-many-of-question-form>
-          <mn-order-question-form *ngSwitchCase="'order'"></mn-order-question-form>
-          <mn-exact-answer-question-form *ngSwitchCase="'exactAnswer'"></mn-exact-answer-question-form>
-          <mn-one-of-question-form *ngSwitchCase="'oneOf'"></mn-one-of-question-form>
-          <mn-one-of-question-form *ngSwitchDefault></mn-one-of-question-form>
+          <mn-many-of-question-form *ngSwitchCase="'multipleOf'" [readonly]="readonly"></mn-many-of-question-form>
+          <mn-order-question-form *ngSwitchCase="'order'" [readonly]="readonly"></mn-order-question-form>
+          <mn-exact-answer-question-form *ngSwitchCase="'exactAnswer'"
+                                         [readonly]="readonly"></mn-exact-answer-question-form>
+          <mn-one-of-question-form *ngSwitchCase="'oneOf'" [readonly]="readonly"></mn-one-of-question-form>
+          <mn-one-of-question-form *ngSwitchDefault [readonly]="readonly"></mn-one-of-question-form>
         </ng-container>
       </p-accordionTab>
 
-      <div class="col-sm-1">
+      <div *ngIf="!readonly" class="col-sm-1">
         <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
                 title="Удалить вопрос"
+                [disabled]="readonly"
                 (click)="questions.removeAt(i)">
         </button>
       </div>
@@ -61,7 +63,8 @@
   </p-accordion>
   <div class="row">
     <div class="col d-flex justify-content-center">
-      <p-splitButton [disabled]="questions.length > 9" [model]="addQuestionBtnItems" (onClick)="addQuestion()"
+      <p-splitButton *ngIf="!readonly" [disabled]="questions.length > 9" [model]="addQuestionBtnItems"
+                     (onClick)="addQuestion()"
                      label="Добавить вопрос" icon="pi pi-plus"
                      styleClass="p-button-secondary"></p-splitButton>
     </div>

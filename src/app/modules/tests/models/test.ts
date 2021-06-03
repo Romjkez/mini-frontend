@@ -2,6 +2,7 @@ import { Tag } from '../../../common/models/tag';
 import { OrderQuestion } from './order-question';
 import { OneOfQuestion } from './one-of-question';
 import { ManyOfQuestion } from './many-of-question';
+import { ExactAnswerQuestion } from './exact-answer-question';
 
 export interface Test {
   id: number;
@@ -15,6 +16,8 @@ export interface Test {
   manyOfQuestions: Array<ManyOfQuestion>;
 
   orderQuestions: Array<OrderQuestion>;
+
+  exactAnswerQuestions: Array<ExactAnswerQuestion>;
 
   isVisible: boolean;
 
