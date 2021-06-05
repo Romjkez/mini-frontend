@@ -54,14 +54,14 @@ export class ExerciseFormComponent implements OnInit {
       .pipe(
         map(res => res.data),
         shareReplay(1),
-        map(tests => tests.map(t => Object.assign(t, {disabled: this.isItemSelected(t)}))),
+        map(tests => tests.map(t => Object.assign(t, {disabled: this.isArticleSelected(t)}))),
       );
 
     this.tests$ = this.testService.getMany({})
       .pipe(
         map(res => res.data),
         shareReplay(1),
-        map(tests => tests.map(t => Object.assign(t, {disabled: this.isItemSelected(t)}))),
+        map(tests => tests.map(t => Object.assign(t, {disabled: this.isTestSelected(t)}))),
       );
 
     this.searchTestText.valueChanges
@@ -72,7 +72,7 @@ export class ExerciseFormComponent implements OnInit {
             .pipe(
               map(res => res.data),
               shareReplay(1),
-              map(tests => tests.map(t => Object.assign(t, {disabled: this.isItemSelected(t)}))),
+              map(tests => tests.map(t => Object.assign(t, {disabled: this.isTestSelected(t)}))),
             );
           this.cdr.detectChanges();
         }),
@@ -87,7 +87,7 @@ export class ExerciseFormComponent implements OnInit {
             .pipe(
               map(res => res.data),
               shareReplay(1),
-              map(tests => tests.map(t => Object.assign(t, {disabled: this.isItemSelected(t)}))),
+              map(tests => tests.map(t => Object.assign(t, {disabled: this.isArticleSelected(t)}))),
             );
           this.cdr.detectChanges();
         }),
@@ -97,7 +97,6 @@ export class ExerciseFormComponent implements OnInit {
 
   addArticle(): void {
     this.articleAddingMode = true;
-
   }
 
   addTest(): void {
@@ -124,8 +123,12 @@ export class ExerciseFormComponent implements OnInit {
     this.selectedArticle = null;
   }
 
-  private isItemSelected(test: SimpleTest | Article): boolean {
-    return this.items.controls.some(c => c.get('id').value === test.id);
+  private isTestSelected(test: SimpleTest): boolean {
+    return this.items.controls.some(c => c.get('type').value === ItemType.TEST && c.get('id').value === test.id);
+  }
+
+  private isArticleSelected(article: Article): boolean {
+    return this.items.controls.some(c => c.get('type').value === ItemType.ARTICLE && c.get('id').value === article.id);
   }
 
 }
