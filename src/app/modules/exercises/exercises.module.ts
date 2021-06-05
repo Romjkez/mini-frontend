@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { SharedModule } from '../shared/shared.module';
 import { ExerciseService } from './exercise.service';
 import { ExerciseViewComponent } from './components/exercise-view/exercise-view.component';
+import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
 
 
 @NgModule({
@@ -22,7 +23,10 @@ import { ExerciseViewComponent } from './components/exercise-view/exercise-view.
     ButtonModule,
     SharedModule
   ],
-  providers: [ExerciseService]
+  providers: [
+    ExerciseService,
+    {provide: CRUD_SERVICE, useExisting: ExerciseService},
+  ]
 })
 export class ExercisesModule {
 }
