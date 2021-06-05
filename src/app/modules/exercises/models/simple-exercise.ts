@@ -8,5 +8,6 @@ export interface SimpleExercise {
   updatedAt: Date;
   tests: number;
   articles: number;
+  isVisible: boolean;
   tags: Array<Tag>;
 }

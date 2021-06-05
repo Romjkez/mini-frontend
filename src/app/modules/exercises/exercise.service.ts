@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { CrudService } from '../../common/models/crud.service';
 import { Exercise } from './models/exercise';
 import { HttpClient } from '@angular/common/http';
-import { GetManyDto } from '../../common/dto/get-many.dto';
 import { Observable } from 'rxjs';
 import { GetManyResponseDto } from '../../common/dto/get-many-response.dto';
 import { SimpleExercise } from './models/simple-exercise';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { environment } from '../../../environments/environment';
+import { GetManyExercisesDto } from './dto/get-many-exercises.dto';
 
 @Injectable()
 export class ExerciseService implements CrudService<Exercise> {
@@ -23,7 +23,7 @@ export class ExerciseService implements CrudService<Exercise> {
     return this.http.get<Exercise>(`${environment.apiHost}/exercise/${id}`);
   }
 
-  getMany<M = SimpleExercise>(dto: GetManyDto): Observable<GetManyResponseDto<M>> {
+  getMany<M = SimpleExercise>(dto: GetManyExercisesDto): Observable<GetManyResponseDto<M>> {
     return this.http.post<GetManyResponseDto<M>>(`${environment.apiHost}/exercise/getMany`, dto);
   }
 }
