@@ -2,6 +2,7 @@ import { Tag } from '../../../common/models/tag';
 
 export interface SimpleTest {
   id: number;
+  title: string;
   oneOfQuestions: number;
   manyOfQuestions: number;
   exactAnswerQuestions: number;
