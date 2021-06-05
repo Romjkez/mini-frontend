@@ -12,6 +12,15 @@ import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
 import { CreateExerciseComponent } from './components/create-exercise/create-exercise.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChipsModule } from 'primeng/chips';
+import { CardModule } from 'primeng/card';
+import { TooltipModule } from 'primeng/tooltip';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { TestsModule } from '../tests/tests.module';
+import { ArticlesModule } from '../articles/articles.module';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { ListboxModule } from 'primeng/listbox';
 
 
 @NgModule({
@@ -27,7 +36,17 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TableModule,
     ButtonModule,
     SharedModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ReactiveFormsModule,
+    ChipsModule,
+    CardModule,
+    TooltipModule,
+    InputSwitchModule,
+    FormsModule,
+    TestsModule,
+    ArticlesModule,
+    SplitButtonModule,
+    ListboxModule,
   ],
   providers: [
     ExerciseService,
