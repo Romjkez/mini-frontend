@@ -9,12 +9,16 @@ import { SharedModule } from '../shared/shared.module';
 import { ExerciseService } from './exercise.service';
 import { ExerciseViewComponent } from './components/exercise-view/exercise-view.component';
 import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
+import { CreateExerciseComponent } from './components/create-exercise/create-exercise.component';
+import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 
 
 @NgModule({
   declarations: [
     ExercisesListComponent,
-    ExerciseViewComponent
+    ExerciseViewComponent,
+    CreateExerciseComponent,
+    ExerciseFormComponent
   ],
   imports: [
     CommonModule,
