@@ -39,12 +39,21 @@
     <div class="col-sm-2 d-flex align-items-center">
       <label for="tags">Наполнение *</label>
     </div>
+    <div *ngIf="items.length===0" class="col-sm-10">
+      <span class="hint">Список пуст...</span>
+    </div>
     <div class="col-sm-10 d-flex align-items-center gap-2">
-      <ul>
-        <li *ngFor="let item of items.controls">
-          {{item.get('title').value}} (ID: {{item.get('id').value}})
+      <ol>
+        <li *ngFor="let item of items.controls; let i = index" class="mb-1">
+          <div class="d-flex align-items-center gap-2">
+            <span>[{{item.get('type').value}}] {{item.get('title').value}} (ID: {{item.get('id').value}})</span>
+            <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
+                    title="Удалить элемент"
+                    (click)="items.removeAt(i);">
+            </button>
+          </div>
         </li>
-      </ul>
+      </ol>
     </div>
   </div>
   <div class="row my-2">
@@ -61,15 +70,20 @@
       <span>Поиск тестов</span>
     </div>
     <div class="col-12 d-flex align-items-start gap-2">
-      <p-listbox [options]="tests$ | async" [(ngModel)]="selectedTest" optionLabel="title" [filter]="true"
-                 [ngModelOptions]="{standalone: true}"
-                 class="multiselect-custom w-100">
-        <ng-template let-item pTemplate="item">
-          <div class="custom-item-value">
-            <div>{{item.title}} (ID: {{item.id}})</div>
-          </div>
-        </ng-template>
-      </p-listbox>
+      <div class="flex-grow-1">
+        <input type="text" placeholder="Начните вводить название (от 2 символов)" pInputText
+               [formControl]="searchTestText" class="w-100 mb-2">
+        <p-listbox [options]="tests$ | async" [(ngModel)]="selectedTest" optionLabel="title"
+                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectTest($event)"
+                   emptyMessage="Статьи не найдены"
+                   class="multiselect-custom w-100">
+          <ng-template let-item pTemplate="item">
+            <div class="custom-item-value">
+              <div>{{item.title}} (ID: {{item.id}})</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
       <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
               title="Отменить добавление теста"
               (click)="testAddingMode = false">
@@ -81,15 +95,20 @@
       <span>Поиск статей</span>
     </div>
     <div class="col-12 d-flex align-items-start gap-2">
-      <p-listbox [options]="articles$ | async" [(ngModel)]="selectedArticle" optionLabel="title" [filter]="true"
-                 [ngModelOptions]="{standalone: true}"
-                 class="multiselect-custom w-100">
-        <ng-template let-item pTemplate="item">
-          <div class="custom-item-value">
-            <div>{{item.title}} (ID: {{item.id}})</div>
-          </div>
-        </ng-template>
-      </p-listbox>
+      <div class="flex-grow-1">
+        <input type="text" placeholder="Начните вводить название (от 2 символов)" pInputText
+               [formControl]="searchArticleText" class="w-100 mb-2">
+        <p-listbox [options]="articles$ | async" [(ngModel)]="selectedArticle" optionLabel="title"
+                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectArticle($event)"
+                   emptyMessage="Статьи не найдены"
+                   class="multiselect-custom w-100">
+          <ng-template let-item pTemplate="item">
+            <div class="custom-item-value">
+              <div>{{item.title}} (ID: {{item.id}})</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
       <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
               title="Отменить добавление статья"
               (click)="articleAddingMode = false">
