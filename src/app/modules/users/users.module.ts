@@ -20,6 +20,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { UserRatingPipe } from './components/pipes/user-rating.pipe';
 import { UserRolePipe } from './components/pipes/user-role.pipe';
 import { ChipModule } from 'primeng/chip';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { ChipModule } from 'primeng/chip';
     BadgeModule,
     TooltipModule,
     ChipModule,
+    ProgressSpinnerModule,
   ],
   providers: [
     UsersService,

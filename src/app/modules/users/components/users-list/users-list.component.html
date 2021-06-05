@@ -5,12 +5,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <p-table [lazy]="true"
+    <div class="col" [ngClass]="(users | async) ? '':'d-flex justify-content-center'">
+      <p-progressSpinner *ngIf="!(users | async)"></p-progressSpinner>
+      <p-table *ngIf="users | async as users" [lazy]="true"
                [scrollable]="true"
                [columns]="selectedColumns"
                [paginator]="true"
-               [value]="users | async"
+               [value]="users"
                [rows]="perPage"
                [resetPageOnSort]="true"
                [totalRecords]="totalItems | async"

@@ -11,6 +11,7 @@ import { ExerciseViewComponent } from './components/exercise-view/exercise-view.
 import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
 import { CreateExerciseComponent } from './components/create-exercise/create-exercise.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ExerciseFormComponent } from './components/exercise-form/exercise-form.
     ExercisesRoutingModule,
     TableModule,
     ButtonModule,
-    SharedModule
+    SharedModule,
+    ProgressSpinnerModule
   ],
   providers: [
     ExerciseService,

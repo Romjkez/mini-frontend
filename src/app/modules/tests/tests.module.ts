@@ -24,6 +24,7 @@ import { QuestionTitlePipe } from './pipes/question-title.pipe';
 import { ManyOfQuestionFormComponent } from './components/questions/many-of-question-form/many-of-question-form.component';
 import { OrderQuestionFormComponent } from './components/questions/order-question-form/order-question-form.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     AccordionModule,
     SplitButtonModule,
     ToggleButtonModule,
+    ProgressSpinnerModule,
   ],
   providers: [
     TestService,
