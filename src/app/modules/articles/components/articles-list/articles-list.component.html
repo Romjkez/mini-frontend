@@ -5,7 +5,7 @@
     </div>
   </div>
   <p-progressSpinner *ngIf="!(articles | async) as articles"></p-progressSpinner>
-  <p *ngIf="(articles | async)?.length === 0" class="h2 empty-list-message text-center">Список статей пуст</p>
+  <p *ngIf="(articles | async)?.length === 0" class="h2 text-color text-center">Список статей пуст</p>
   <a *ngFor="let article of articles | async" [routerLink]="'/articles/' + article.id" class="article row mb-4">
     <div class="col">
       <div class="card-content" [style.backgroundImage]="'url(\'assets/img/black.png\'), url('+article.previewUrl+')'">

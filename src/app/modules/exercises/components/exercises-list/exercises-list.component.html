@@ -7,84 +7,87 @@
   <div class="row">
     <div class="col" [ngClass]="(exercises | async) ? '':'d-flex justify-content-center'">
       <p-progressSpinner *ngIf="!(exercises | async)"></p-progressSpinner>
-      <p-table *ngIf="exercises | async as exercises" [lazy]="true"
-               [scrollable]="true"
-               [paginator]="true"
-               [value]="exercises"
-               [rows]="perPage"
-               [resetPageOnSort]="true"
-               [totalRecords]="totalItems | async"
-               [showCurrentPageReport]="true"
-               [currentPageReportTemplate]="currentPageReportTemplate"
-               [rowsPerPageOptions]="perPageOptions"
-               [rowHover]="true"
-               [multiSortMeta]="multiSortMeta"
-               (onSort)="onSort($event)"
-               (onPage)="pageChanged($event)"
-               sortMode="multiple"
-               scrollHeight="635px"
-               styleClass="p-datatable-sm">
-        <ng-template pTemplate="colgroup">
-          <colgroup>
-            <col style="width:70px">
-            <col style="width:150px">
-            <col style="width:150px">
-            <col style="width:150px">
-            <col style="width:170px">
-            <col style="width:150px">
-            <col style="width:190px">
-            <col style="width:190px">
-            <col style="width:220px">
-          </colgroup>
-        </ng-template>
+      <ng-container *ngIf="exercises | async as exercises">
+        <p-table *ngIf="exercises.length > 0" [lazy]="true"
+                 [scrollable]="true"
+                 [paginator]="true"
+                 [value]="exercises"
+                 [rows]="perPage"
+                 [resetPageOnSort]="true"
+                 [totalRecords]="totalItems | async"
+                 [showCurrentPageReport]="true"
+                 [currentPageReportTemplate]="currentPageReportTemplate"
+                 [rowsPerPageOptions]="perPageOptions"
+                 [rowHover]="true"
+                 [multiSortMeta]="multiSortMeta"
+                 (onSort)="onSort($event)"
+                 (onPage)="pageChanged($event)"
+                 sortMode="multiple"
+                 scrollHeight="635px"
+                 styleClass="p-datatable-sm">
+          <ng-template pTemplate="colgroup">
+            <colgroup>
+              <col style="width:70px">
+              <col style="width:150px">
+              <col style="width:150px">
+              <col style="width:150px">
+              <col style="width:170px">
+              <col style="width:150px">
+              <col style="width:190px">
+              <col style="width:190px">
+              <col style="width:220px">
+            </colgroup>
+          </ng-template>
 
-        <!--    <ng-template pTemplate="caption">
-              <p-multiSelect [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
-                             selectedItemsLabel="{0} выбрано" [style]="{minWidth: '200px'}" placeholder="Выберите колонки">
-              </p-multiSelect>
-            </ng-template>-->
+          <!--    <ng-template pTemplate="caption">
+                <p-multiSelect [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
+                               selectedItemsLabel="{0} выбрано" [style]="{minWidth: '200px'}" placeholder="Выберите колонки">
+                </p-multiSelect>
+              </ng-template>-->
 
-        <ng-template pTemplate="header" let-columns="columns">
-          <tr>
-            <th>ID
-            </th>
-            <th>Название
-            </th>
-            <th>Кол-во тестов
-            </th>
-            <th>Кол-во статей
-            </th>
-            <th>Ссылка на превью
-            </th>
-            <th pSortableColumn="isVisible">Опубликовано
-              <p-sortIcon field="isVisible"></p-sortIcon>
-            </th>
-            <th pSortableColumn="createdAt">Дата создания
-              <p-sortIcon field="createdAt"></p-sortIcon>
-            </th>
-            <th pSortableColumn="updatedAt">Дата обновления
-              <p-sortIcon field="updatedAt"></p-sortIcon>
-            </th>
-            <th>Теги
-            </th>
-          </tr>
-        </ng-template>
+          <ng-template pTemplate="header" let-columns="columns">
+            <tr>
+              <th>ID
+              </th>
+              <th>Название
+              </th>
+              <th>Кол-во тестов
+              </th>
+              <th>Кол-во статей
+              </th>
+              <th>Ссылка на превью
+              </th>
+              <th pSortableColumn="isVisible">Опубликовано
+                <p-sortIcon field="isVisible"></p-sortIcon>
+              </th>
+              <th pSortableColumn="createdAt">Дата создания
+                <p-sortIcon field="createdAt"></p-sortIcon>
+              </th>
+              <th pSortableColumn="updatedAt">Дата обновления
+                <p-sortIcon field="updatedAt"></p-sortIcon>
+              </th>
+              <th>Теги
+              </th>
+            </tr>
+          </ng-template>
 
-        <ng-template pTemplate="body" let-exercise let-columns="columns">
-          <tr>
-            <td>{{exercise.id}}</td>
-            <td>{{exercise.title}}</td>
-            <td>{{exercise.tests}}</td>
-            <td>{{exercise.articles}}</td>
-            <td class="table-cell-ellipsis" [title]="exercise.previewUrl">{{exercise.previewUrl}}</td>
-            <td>{{!exercise.isPrivate | boolean}}</td>
-            <td class="date-cell">{{exercise.createdAt | date:'dd.MM.YYYY HH:mm'}}</td>
-            <td class="date-cell">{{exercise.updatedAt | date:'dd.MM.YYYY HH:mm'}}</td>
-            <td>{{exercise.tags | tags}}</td>
-          </tr>
-        </ng-template>
+          <ng-template pTemplate="body" let-exercise let-columns="columns">
+            <tr>
+              <td>{{exercise.id}}</td>
+              <td>{{exercise.title}}</td>
+              <td>{{exercise.tests}}</td>
+              <td>{{exercise.articles}}</td>
+              <td class="table-cell-ellipsis" [title]="exercise.previewUrl">{{exercise.previewUrl}}</td>
+              <td>{{!exercise.isPrivate | boolean}}</td>
+              <td class="date-cell">{{exercise.createdAt | date:'dd.MM.YYYY HH:mm'}}</td>
+              <td class="date-cell">{{exercise.updatedAt | date:'dd.MM.YYYY HH:mm'}}</td>
+              <td>{{exercise.tags | tags}}</td>
+            </tr>
+          </ng-template>
 
-      </p-table>
+        </p-table>
+        <p *ngIf="exercises.length === 0" class="h2 text-color text-center">Список упражнений пуст</p>
+      </ng-container>
     </div>
   </div>
 </div>
