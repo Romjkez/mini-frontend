@@ -21,6 +21,7 @@ import { EditorModule } from 'primeng/editor';
 import { ParseHtmlTextPipe } from './pipes/parse-html-text.pipe';
 import { TabViewModule } from 'primeng/tabview';
 import { ArticleFormComponent } from './components/article-form/article-form.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ArticleFormComponent } from './components/article-form/article-form.com
     InputTextModule,
     ChipsModule,
     EditorModule,
-    TabViewModule
+    TabViewModule,
+    ProgressSpinnerModule
   ],
   providers: [
     ArticleService,

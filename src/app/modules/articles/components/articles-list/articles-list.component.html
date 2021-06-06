@@ -4,7 +4,8 @@
       <a pButton label="Добавить" class="p-button-info text-decoration-none" routerLink="/articles/create"></a>
     </div>
   </div>
-
+  <p-progressSpinner *ngIf="!(articles | async) as articles"></p-progressSpinner>
+  <p *ngIf="(articles | async)?.length === 0" class="h2 empty-list-message text-center">Список статей пуст</p>
   <a *ngFor="let article of articles | async" [routerLink]="'/articles/' + article.id" class="article row mb-4">
     <div class="col">
       <div class="card-content" [style.backgroundImage]="'url(\'assets/img/black.png\'), url('+article.previewUrl+')'">
@@ -34,7 +35,8 @@
     </div>
   </a>
 
-  <p-paginator [totalRecords]="totalItems | async" [rows]="perPage" [rowsPerPageOptions]="perPageOptions"
+  <p-paginator *ngIf="(articles | async)?.length > 0" [totalRecords]="totalItems | async" [rows]="perPage"
+               [rowsPerPageOptions]="perPageOptions"
                (onPageChange)="pageChanged($event)">
   </p-paginator>
 </div>

@@ -42,11 +42,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         label: 'Пользователи',
         routerLink: '/users',
       },
-      {
+     /* {
         label: 'Новости',
         routerLink: '/news',
-        disabled: true
-      }
+      }*/
     ];
     this.currentUrl$ = this.router.events
       .pipe(
