@@ -77,7 +77,7 @@
           </ng-template>
 
           <ng-template pTemplate="body" let-test let-columns="columns">
-            <tr>
+            <tr (dblclick)="onDblClick(test.id)">
               <td>{{test.id}}</td>
               <td>{{test.title}}</td>
               <td>{{test.oneOfQuestions}}</td>

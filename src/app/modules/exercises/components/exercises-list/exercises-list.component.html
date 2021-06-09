@@ -72,7 +72,7 @@
           </ng-template>
 
           <ng-template pTemplate="body" let-exercise let-columns="columns">
-            <tr>
+            <tr (dblclick)="onDblClick(exercise.id)">
               <td>{{exercise.id}}</td>
               <td>{{exercise.title}}</td>
               <td>{{exercise.tests}}</td>

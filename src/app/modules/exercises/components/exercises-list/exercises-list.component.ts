@@ -12,6 +12,7 @@ import { MultiSortMeta } from '../../../../common/models/multi-sort-meta';
 import { convertSortType } from '../../../../common/utils/convert-sort-type';
 import { PaginationChangedEvent } from '../../../../common/models/pagination-changed-event';
 import { calculatePage } from '../../../../common/utils/calculate-page';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'mn-exercises-list',
@@ -32,7 +33,9 @@ export class ExercisesListComponent implements OnInit {
   filter: ExerciseFilterDto = {};
   multiSortMeta: Array<SortMeta>;
 
-  constructor(private readonly exerciseService: ExerciseService) {
+  constructor(private readonly exerciseService: ExerciseService,
+              private readonly router: Router,
+              private readonly route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -62,6 +65,10 @@ export class ExercisesListComponent implements OnInit {
     this.perPage = ev.rows;
 
     this.getData();
+  }
+
+  onDblClick(id: number): Promise<boolean> {
+    return this.router.navigate([id], {relativeTo: this.route});
   }
 
   private getData(): void {

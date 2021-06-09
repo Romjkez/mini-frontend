@@ -81,7 +81,7 @@
           </ng-template>
 
           <ng-template pTemplate="body" let-user let-columns="columns">
-            <tr>
+            <tr (dblclick)="onDblClick(user.id)">
               <td>{{user.id}}</td>
               <td>{{user.firstName}}</td>
               <td>{{user.lastName}}</td>
