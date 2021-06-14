@@ -55,7 +55,7 @@ export class CreateTestComponent implements OnInit {
             summary: 'Тест успешно добавлен',
             detail: `Присвоен ID: ${user.id}`
           });
-          return this.router.navigate(['/exercises', user.id]);
+          return this.router.navigate(['/tests', user.id]);
         }),
         catchError((err: HttpErrorResponse) => {
           this.messageService.add({
