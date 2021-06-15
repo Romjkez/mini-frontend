@@ -39,14 +39,13 @@
     <div class="col-sm-2 d-flex align-items-center">
       <label for="tags">Наполнение *</label>
     </div>
-    <div *ngIf="items.length===0" class="col-sm-10">
-      <span class="hint">Список пуст...</span>
-    </div>
-    <div class="col-sm-10 d-flex align-items-center gap-2">
+    <div class="col-sm-8 d-flex align-items-center gap-2">
+      <span *ngIf="items.length===0" class="hint">Список пуст...</span>
       <ol>
         <li *ngFor="let item of items.controls; let i = index" class="mb-1">
           <div class="d-flex align-items-center gap-2">
-            <span>[{{item.get('type').value}}] {{item.get('title').value}} (ID: {{item.get('id').value}})</span>
+            <span>[{{item.get('type').value | exerciseItemType}}] {{item.get('title').value}}
+              (ID: {{item.get('id').value}})</span>
             <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
                     title="Удалить элемент"
                     (click)="items.removeAt(i);">
@@ -54,6 +53,9 @@
           </div>
         </li>
       </ol>
+    </div>
+    <div class="col-sm-2 d-flex align-items-center">
+      <i *ngIf="!readonly" class="pi pi-question-circle" pTooltip="Не менее 1 статьи и теста"></i>
     </div>
   </div>
   <div class="row my-2">

@@ -21,6 +21,7 @@ import { TestsModule } from '../tests/tests.module';
 import { ArticlesModule } from '../articles/articles.module';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ListboxModule } from 'primeng/listbox';
+import { ExerciseItemTypePipe } from './pipes/exercise-item-type.pipe';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ListboxModule } from 'primeng/listbox';
     ExercisesListComponent,
     ExerciseViewComponent,
     CreateExerciseComponent,
-    ExerciseFormComponent
+    ExerciseFormComponent,
+    ExerciseItemTypePipe
   ],
   imports: [
     CommonModule,

@@ -11,9 +11,9 @@ import { Test } from '../../../tests/models/test';
 import { ArticleFilterDto } from '../../../articles/dto/article-filter.dto';
 import { TestFilterDto } from '../../../tests/dto/test-filter.dto';
 
-enum ItemType {
-  TEST = 'Тест',
-  ARTICLE = 'Статья'
+export enum ExItemType {
+  TEST = 'TEST',
+  ARTICLE = 'ARTICLE'
 }
 
 @Component({
@@ -115,7 +115,7 @@ export class ExerciseFormComponent implements OnInit {
     this.items.push(this.fb.group({
       id: this.fb.control(test.id),
       title: this.fb.control(test.title),
-      type: this.fb.control(ItemType.TEST)
+      type: this.fb.control(ExItemType.TEST)
     }));
     this.selectedTest = null;
   }
@@ -125,17 +125,17 @@ export class ExerciseFormComponent implements OnInit {
     this.items.push(this.fb.group({
       id: this.fb.control(article.id),
       title: this.fb.control(article.title),
-      type: this.fb.control(ItemType.ARTICLE)
+      type: this.fb.control(ExItemType.ARTICLE)
     }));
     this.selectedArticle = null;
   }
 
   private isTestSelected(test: SimpleTest): boolean {
-    return this.items.controls.some(c => c.get('type').value === ItemType.TEST && c.get('id').value === test.id);
+    return this.items.controls.some(c => c.get('type').value === ExItemType.TEST && c.get('id').value === test.id);
   }
 
   private isArticleSelected(article: Article): boolean {
-    return this.items.controls.some(c => c.get('type').value === ItemType.ARTICLE && c.get('id').value === article.id);
+    return this.items.controls.some(c => c.get('type').value === ExItemType.ARTICLE && c.get('id').value === article.id);
   }
 
 }
