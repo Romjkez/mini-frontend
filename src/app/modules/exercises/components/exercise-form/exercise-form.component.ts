@@ -8,6 +8,8 @@ import { ArticleService } from '../../../articles/article.service';
 import { auditTime, map, shareReplay, tap } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
 import { Test } from '../../../tests/models/test';
+import { ArticleFilterDto } from '../../../articles/dto/article-filter.dto';
+import { TestFilterDto } from '../../../tests/dto/test-filter.dto';
 
 enum ItemType {
   TEST = 'Тест',
@@ -35,6 +37,9 @@ export class ExerciseFormComponent implements OnInit {
   searchTestText: FormControl = this.fb.control('');
   searchArticleText: FormControl = this.fb.control('');
 
+  articlesFilter: ArticleFilterDto = {isInExercise: false};
+  testsFilter: TestFilterDto = {isInExercise: false};
+
   constructor(private readonly testService: TestService,
               private readonly articleService: ArticleService,
               private readonly fb: FormBuilder,
@@ -50,14 +55,14 @@ export class ExerciseFormComponent implements OnInit {
       },
     ];
 
-    this.articles$ = this.articleService.getMany({})
+    this.articles$ = this.articleService.getMany({filter: this.articlesFilter})
       .pipe(
         map(res => res.data),
         shareReplay(1),
         map(tests => tests.map(t => Object.assign(t, {disabled: this.isArticleSelected(t)}))),
       );
 
-    this.tests$ = this.testService.getMany({})
+    this.tests$ = this.testService.getMany({filter: this.testsFilter})
       .pipe(
         map(res => res.data),
         shareReplay(1),
@@ -68,7 +73,8 @@ export class ExerciseFormComponent implements OnInit {
       .pipe(
         auditTime(200),
         tap(() => {
-          this.tests$ = this.testService.getMany({filter: {title: this.searchTestText.value.trim()}})
+          this.testsFilter.title = this.searchTestText.value?.trim();
+          this.tests$ = this.testService.getMany({filter: this.testsFilter})
             .pipe(
               map(res => res.data),
               shareReplay(1),
@@ -83,7 +89,8 @@ export class ExerciseFormComponent implements OnInit {
       .pipe(
         auditTime(200),
         tap(() => {
-          this.articles$ = this.articleService.getMany({filter: {title: this.searchArticleText.value.trim()}})
+          this.articlesFilter.title = this.searchArticleText.value?.trim();
+          this.articles$ = this.articleService.getMany({filter: this.articlesFilter})
             .pipe(
               map(res => res.data),
               shareReplay(1),
