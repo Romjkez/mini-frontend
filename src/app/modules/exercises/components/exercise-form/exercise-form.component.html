@@ -46,7 +46,7 @@
           <div class="d-flex align-items-center gap-2">
             <span>[{{item.get('type').value | exerciseItemType}}] {{item.get('title').value}}
               (ID: {{item.get('id').value}})</span>
-            <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
+            <button *ngIf="!readonly" pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
                     title="Удалить элемент"
                     (click)="items.removeAt(i);">
             </button>

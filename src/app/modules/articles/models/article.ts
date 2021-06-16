@@ -24,4 +24,5 @@ export interface Article extends CreatedUpdatedEntity {
 
   tags: Array<Tag>;
 
+  order: number;
 }
