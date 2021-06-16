@@ -1,0 +1,17 @@
+<div class="container" style="max-width: 800px">
+  <div class="row my-5">
+    <div class="col">
+      <p-card>
+        <h1 class="h2 text-center">Добавление упражнения</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4 container">
+          <mn-exercise-form [form]="form"></mn-exercise-form>
+          <div class="row mt-4">
+            <div class="col">
+              <button class="w-100" pButton type="submit" label="Сохранить"></button>
+            </div>
+          </div>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>

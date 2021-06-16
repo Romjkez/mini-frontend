@@ -1,0 +1,17 @@
+::ng-deep .multiselect-custom {
+  .p-multiselect {
+    width: 100%;
+  }
+
+  .custom-item-value {
+    padding: .25rem .5rem;
+    border-radius: 3px;
+    margin-right: .5rem;
+    /* background-color: var(--primary-color);
+     color: var(--primary-color-text);*/
+  }
+
+  .p-listbox-item {
+    padding: .1rem 1rem !important;
+  }
+}

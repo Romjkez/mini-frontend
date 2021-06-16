@@ -5,96 +5,100 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <p-table [lazy]="true"
-               [scrollable]="true"
-               [columns]="selectedColumns"
-               [paginator]="true"
-               [value]="users | async"
-               [rows]="perPage"
-               [resetPageOnSort]="true"
-               [totalRecords]="totalItems | async"
-               [showCurrentPageReport]="true"
-               [currentPageReportTemplate]="currentPageReportTemplate"
-               [rowsPerPageOptions]="perPageOptions"
-               [rowHover]="true"
-               (onPage)="pageChanged($event)"
-               scrollHeight="635px"
-               styleClass="p-datatable-sm">
-        <ng-template pTemplate="colgroup">
-          <colgroup>
-            <col style="width:70px">
-            <col style="width:170px">
-            <col style="width:170px">
-            <col style="width:250px">
-            <col style="width:150px">
-            <col style="width:200px">
-            <col style="width:100px">
-            <col style="width:220px">
-            <col style="width:220px">
-            <col style="width:120px">
-            <col style="width:220px">
-          </colgroup>
-        </ng-template>
+    <div class="col" [ngClass]="(users | async) ? '':'d-flex justify-content-center'">
+      <p-progressSpinner *ngIf="!(users | async)"></p-progressSpinner>
+      <ng-container *ngIf="users | async as users">
+        <p-table *ngIf="users.length > 0" [lazy]="true"
+                 [scrollable]="true"
+                 [columns]="selectedColumns"
+                 [paginator]="true"
+                 [value]="users"
+                 [rows]="perPage"
+                 [resetPageOnSort]="true"
+                 [totalRecords]="totalItems | async"
+                 [showCurrentPageReport]="true"
+                 [currentPageReportTemplate]="currentPageReportTemplate"
+                 [rowsPerPageOptions]="perPageOptions"
+                 [rowHover]="true"
+                 (onPage)="pageChanged($event)"
+                 scrollHeight="635px"
+                 styleClass="p-datatable-sm">
+          <ng-template pTemplate="colgroup">
+            <colgroup>
+              <col style="width:70px">
+              <col style="width:170px">
+              <col style="width:170px">
+              <col style="width:250px">
+              <col style="width:150px">
+              <col style="width:200px">
+              <col style="width:100px">
+              <col style="width:220px">
+              <col style="width:220px">
+              <col style="width:120px">
+              <col style="width:220px">
+            </colgroup>
+          </ng-template>
 
-        <!--    <ng-template pTemplate="caption">
-              <p-multiSelect [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
-                             selectedItemsLabel="{0} выбрано" [style]="{minWidth: '200px'}" placeholder="Выберите колонки">
-              </p-multiSelect>
-            </ng-template>-->
+          <!--    <ng-template pTemplate="caption">
+                <p-multiSelect [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
+                               selectedItemsLabel="{0} выбрано" [style]="{minWidth: '200px'}" placeholder="Выберите колонки">
+                </p-multiSelect>
+              </ng-template>-->
 
-        <ng-template pTemplate="header" let-columns="columns">
-          <tr>
-            <th>ID
-            </th>
-            <th pSortableColumn="firstName">Имя
-              <p-sortIcon field="firstName"></p-sortIcon>
-            </th>
-            <th pSortableColumn="lastName">Фамилия
-              <p-sortIcon field="lastName"></p-sortIcon>
-            </th>
-            <th pSortableColumn="email">Email
-              <p-sortIcon field="email"></p-sortIcon>
-            </th>
-            <th pSortableColumn="role">Роль
-              <p-sortIcon field="role"></p-sortIcon>
-            </th>
-            <th pSortableColumn="company">Компания
-              <p-sortIcon field="company"></p-sortIcon>
-            </th>
-            <th>Рейтинг
-            </th>
-            <th pSortableColumn="createdAt">Дата регистрации
-              <p-sortIcon field="createdAt"></p-sortIcon>
-            </th>
-            <th pSortableColumn="updatedAt">Дата обновления
-              <p-sortIcon field="updatedAt"></p-sortIcon>
-            </th>
-            <th pSortableColumn="isPrivate">Приватный профиль
-              <p-sortIcon field="isPrivate"></p-sortIcon>
-            </th>
-            <th>Дата блокировки
-            </th>
-          </tr>
-        </ng-template>
+          <ng-template pTemplate="header" let-columns="columns">
+            <tr>
+              <th>ID
+              </th>
+              <th pSortableColumn="firstName">Имя
+                <p-sortIcon field="firstName"></p-sortIcon>
+              </th>
+              <th pSortableColumn="lastName">Фамилия
+                <p-sortIcon field="lastName"></p-sortIcon>
+              </th>
+              <th pSortableColumn="email">Email
+                <p-sortIcon field="email"></p-sortIcon>
+              </th>
+              <th pSortableColumn="role">Роль
+                <p-sortIcon field="role"></p-sortIcon>
+              </th>
+              <th pSortableColumn="company">Компания
+                <p-sortIcon field="company"></p-sortIcon>
+              </th>
+              <th>Рейтинг
+              </th>
+              <th pSortableColumn="createdAt">Дата регистрации
+                <p-sortIcon field="createdAt"></p-sortIcon>
+              </th>
+              <th pSortableColumn="updatedAt">Дата обновления
+                <p-sortIcon field="updatedAt"></p-sortIcon>
+              </th>
+              <th pSortableColumn="isPrivate">Приватный профиль
+                <p-sortIcon field="isPrivate"></p-sortIcon>
+              </th>
+              <th>Дата блокировки
+              </th>
+            </tr>
+          </ng-template>
 
-        <ng-template pTemplate="body" let-user let-columns="columns">
-          <tr>
-            <td>{{user.id}}</td>
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.role | userRole}}</td>
-            <td>{{user.company | defaultValue}}</td>
-            <td>{{user.rating | userRating | defaultValue}}</td>
-            <td class="date-cell">{{user.createdAt | date:'dd.MM.YYYY HH:mm'}}</td>
-            <td class="date-cell">{{user.updatedAt | date:'dd.MM.YYYY HH:mm'}}</td>
-            <td>{{user.isPrivate | boolean}}</td>
-            <td>{{user.bannedAt | date:'dd.MM.YYYY HH:mm' | defaultValue}}</td>
-          </tr>
-        </ng-template>
+          <ng-template pTemplate="body" let-user let-columns="columns">
+            <tr (dblclick)="onDblClick(user.id)">
+              <td>{{user.id}}</td>
+              <td>{{user.firstName}}</td>
+              <td>{{user.lastName}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.role | userRole}}</td>
+              <td>{{user.company | defaultValue}}</td>
+              <td>{{user.rating | userRating | defaultValue}}</td>
+              <td class="date-cell">{{user.createdAt | date:'dd.MM.YYYY HH:mm'}}</td>
+              <td class="date-cell">{{user.updatedAt | date:'dd.MM.YYYY HH:mm'}}</td>
+              <td>{{user.isPrivate | boolean}}</td>
+              <td>{{user.bannedAt | date:'dd.MM.YYYY HH:mm' | defaultValue}}</td>
+            </tr>
+          </ng-template>
 
-      </p-table>
+        </p-table>
+        <p *ngIf="users.length === 0" class="h2 text-color text-center">Список пользователей пуст</p>
+      </ng-container>
     </div>
   </div>
 </div>

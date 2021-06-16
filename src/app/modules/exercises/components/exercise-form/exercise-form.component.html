@@ -1,0 +1,126 @@
+<form [formGroup]="form" class="container">
+  <div class="row">
+    <div class="col-sm-2 d-flex align-items-center">
+      <label for="title">Заголовок *</label>
+    </div>
+    <div class="col-sm-10">
+      <input required formControlName="title" class="w-100" type="text" id="title" pInputText
+             [readOnly]="readonly"
+             placeholder="Не менее 3 символов">
+    </div>
+  </div>
+  <div class="row align-items-center mt-4">
+    <div class="col-sm-2">
+      <label for="previewUrl">Ссылка на превью</label>
+    </div>
+    <div class="col-sm-10">
+      <div class="d-flex align-items-center gap-2">
+        <input formControlName="previewUrl" class="w-100" type="text" id="previewUrl" pInputText [readOnly]="readonly"
+               placeholder="Пример: https://i.imgur.com/yLiIVxG.jpg">
+        <i *ngIf="!readonly" class="pi pi-question-circle"
+           pTooltip="Укажите прямую ссылку на изображение. Рекомендуемый размер: 1500x400 пикселей"></i>
+      </div>
+    </div>
+  </div>
+  <div class="row align-items-center mt-4">
+    <div class="col-sm-2 d-flex align-items-center">
+      <label for="tags">Теги *</label>
+    </div>
+    <div class="col-sm-10 d-flex align-items-center gap-2">
+      <p-chips formControlName="tags" class="flex-grow-1" styleClass="w-100" id="tags" separator=","></p-chips>
+      <i *ngIf="!readonly" class="pi pi-question-circle"
+         pTooltip="Укажите от 1 до 10 ключевых слов, по которым упражнение можно будет найти"></i>
+    </div>
+  </div>
+  <div class="row">
+    <small class="offset-sm-2 hint">Используйте запятую в качестве разделителя</small>
+  </div>
+  <div class="row mt-4">
+    <div class="col-sm-2 d-flex align-items-center">
+      <label for="tags">Наполнение *</label>
+    </div>
+    <div class="col-sm-8 d-flex align-items-center gap-2">
+      <span *ngIf="items.length===0" class="hint">Список пуст...</span>
+      <ol>
+        <li *ngFor="let item of items.controls; let i = index" class="mb-1">
+          <div class="d-flex align-items-center gap-2">
+            <span>[{{item.get('type').value | exerciseItemType}}] {{item.get('title').value}}
+              (ID: {{item.get('id').value}})</span>
+            <button *ngIf="!readonly" pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
+                    title="Удалить элемент"
+                    (click)="items.removeAt(i);">
+            </button>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div class="col-sm-2 d-flex align-items-center">
+      <i *ngIf="!readonly" class="pi pi-question-circle" pTooltip="Не менее 1 статьи и теста"></i>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col d-flex justify-content-center">
+      <p-splitButton *ngIf="!readonly" [disabled]="items.length > 9 || testAddingMode || articleAddingMode"
+                     [model]="addItemBtnItems"
+                     (onClick)="addArticle()"
+                     label="Добавить статью" icon="pi pi-plus"
+                     styleClass="p-button-secondary"></p-splitButton>
+    </div>
+  </div>
+  <div *ngIf="testAddingMode" class="row mt-4">
+    <div class="col-12 my-2 text-center">
+      <span>Поиск тестов</span>
+    </div>
+    <div class="col-12 d-flex align-items-start gap-2">
+      <div class="flex-grow-1">
+        <input type="text" placeholder="Начните вводить название (от 2 символов)" pInputText
+               [formControl]="searchTestText" class="w-100 mb-2">
+        <p-listbox [options]="tests$ | async" [(ngModel)]="selectedTest" optionLabel="title"
+                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectTest($event)"
+                   emptyMessage="Статьи не найдены"
+                   class="multiselect-custom w-100">
+          <ng-template let-item pTemplate="item">
+            <div class="custom-item-value">
+              <div>{{item.title}} (ID: {{item.id}})</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+      <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
+              title="Отменить добавление теста"
+              (click)="testAddingMode = false">
+      </button>
+    </div>
+  </div>
+  <div *ngIf="articleAddingMode" class="row mt-4">
+    <div class="col-12 my-2 text-center">
+      <span>Поиск статей</span>
+    </div>
+    <div class="col-12 d-flex align-items-start gap-2">
+      <div class="flex-grow-1">
+        <input type="text" placeholder="Начните вводить название (от 2 символов)" pInputText
+               [formControl]="searchArticleText" class="w-100 mb-2">
+        <p-listbox [options]="articles$ | async" [(ngModel)]="selectedArticle" optionLabel="title"
+                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectArticle($event)"
+                   emptyMessage="Статьи не найдены"
+                   class="multiselect-custom w-100">
+          <ng-template let-item pTemplate="item">
+            <div class="custom-item-value">
+              <div>{{item.title}} (ID: {{item.id}})</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+      <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm"
+              title="Отменить добавление статья"
+              (click)="articleAddingMode = false">
+      </button>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="d-flex gap-3 justify-content-center">
+      <label for="isVisible">{{ readonly ? 'Опубликовано' : 'Опубликовать' }}</label>
+      <p-inputSwitch id="isVisible" formControlName="isVisible" [readonly]="readonly"></p-inputSwitch>
+    </div>
+  </div>
+</form>

@@ -12,6 +12,7 @@ import { convertSortType } from '../../../../common/utils/convert-sort-type';
 import { TestFilterDto } from '../../dto/test-filter.dto';
 import { MultiSortMeta } from '../../../../common/models/multi-sort-meta';
 import { SortMeta } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'mn-tests-list',
@@ -32,7 +33,9 @@ export class TestsListComponent implements OnInit {
   filter: TestFilterDto = {};
   multiSortMeta: Array<SortMeta>;
 
-  constructor(private readonly testService: TestService) {
+  constructor(private readonly testService: TestService,
+              private readonly router: Router,
+              private readonly route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -62,6 +65,10 @@ export class TestsListComponent implements OnInit {
     this.perPage = ev.rows;
 
     this.getData();
+  }
+
+  onDblClick(id: number): Promise<boolean> {
+    return this.router.navigate([id], {relativeTo: this.route});
   }
 
   private getData(): void {

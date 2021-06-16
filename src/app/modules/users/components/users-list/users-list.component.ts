@@ -8,6 +8,7 @@ import { GetManyResponseDto } from '../../../../common/dto/get-many-response.dto
 import { CURRENT_PAGE_REPORT_TEMPLATE, ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from '../../../../common/constants';
 import { PaginationChangedEvent } from '../../../../common/models/pagination-changed-event';
 import { calculatePage } from '../../../../common/utils/calculate-page';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -38,7 +39,9 @@ export class UsersListComponent implements OnInit {
   totalItems: Observable<number>;
   selectedColumns: Array<TableCol> = this.columns;
 
-  constructor(private readonly userService: UsersService) {
+  constructor(private readonly userService: UsersService,
+              private readonly router: Router,
+              private readonly route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -55,6 +58,10 @@ export class UsersListComponent implements OnInit {
       .pipe(
         map(res => res.totalItems),
       );
+  }
+
+  onDblClick(userId: number): Promise<boolean> {
+    return this.router.navigate([userId], {relativeTo: this.route});
   }
 
   pageChanged(ev: PaginationChangedEvent): void {

@@ -1,0 +1,13 @@
+<div class="container" style="max-width: 800px">
+  <div class="row my-5">
+    <div class="col">
+      <p-card>
+        <h1 class="h2 text-center">Упражнение #{{exercise.id}}</h1>
+        <form #exerciseForm [formGroup]="form" class="mt-4 container">
+          <mn-exercise-form [form]="form" [readonly]="true"></mn-exercise-form>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>
+

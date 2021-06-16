@@ -1,15 +1,13 @@
 import { Tag } from '../../../common/models/tag';
 
-export interface SimpleTest {
+export interface SimpleExercise {
   id: number;
   title: string;
   previewUrl?: string;
-  oneOfQuestions: number;
-  manyOfQuestions: number;
-  exactAnswerQuestions: number;
-  orderQuestions: number;
-  isVisible: boolean;
   createdAt: Date;
   updatedAt: Date;
+  tests: number;
+  articles: number;
+  isVisible: boolean;
   tags: Array<Tag>;
 }

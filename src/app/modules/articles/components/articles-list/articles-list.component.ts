@@ -3,7 +3,7 @@ import { ArticleService } from '../../article.service';
 import { Observable } from 'rxjs';
 import { GetManyResponseDto } from '../../../../common/dto/get-many-response.dto';
 import { Article } from '../../models/article';
-import { CURRENT_PAGE_REPORT_TEMPLATE, ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from '../../../../common/constants';
+import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from '../../../../common/constants';
 import { map, shareReplay } from 'rxjs/operators';
 import { PaginationChangedEvent } from '../../../../common/models/pagination-changed-event';
 import { calculatePage } from '../../../../common/utils/calculate-page';
@@ -17,7 +17,6 @@ import { calculatePage } from '../../../../common/utils/calculate-page';
 export class ArticlesListComponent implements OnInit {
   readonly perPage = ROWS_PER_PAGE;
   readonly perPageOptions = ROWS_PER_PAGE_OPTIONS;
-  readonly currentPageReportTemplate = CURRENT_PAGE_REPORT_TEMPLATE;
   data: Observable<GetManyResponseDto<Article>>;
   articles: Observable<Array<Article>>;
   totalItems: Observable<number>;
