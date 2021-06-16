@@ -1,1 +1,41 @@
-<p>main-page works!</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12 col-sm-6">
+      <p-card>
+        <div class="d-flex align-items-center gap-3">
+          <h1>Сводка за</h1>
+          <p-dropdown placeholder="Выберите период" [formControl]="selectedPeriod" [optionLabel]=""
+                      [options]="periodOptions">
+            <ng-template pTemplate="selectedItem">
+              <div *ngIf="selectedPeriod.value">
+                <span>{{selectedPeriod.value | period}}</span>
+              </div>
+            </ng-template>
+            <ng-template let-period pTemplate="item">
+              <span>{{period | period}}</span>
+            </ng-template>
+          </p-dropdown>
+        </div>
+
+        <ul>
+          <li>
+            <div class="d-flex align-items-center">
+              <span>Пройдено тестов:</span>&nbsp;<p-skeleton *ngIf="(loading | async)===true" width="40px"
+                                                             height="1.125rem" styleClass="ms-2"></p-skeleton>
+              <ng-container *ngIf="!(loading | async)">{{finishedTests$ | async}}</ng-container>
+            </div>
+          </li>
+        </ul>
+      </p-card>
+    </div>
+    <div class="offset-sm-1 offset-0 col-12 col-sm-5">
+      <p-card>
+        <h1>Статистика</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+          numquam deserunt
+          quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+          quas!</p>
+      </p-card>
+    </div>
+  </div>
+</div>

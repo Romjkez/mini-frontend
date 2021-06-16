@@ -17,6 +17,7 @@ import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { AuthInterceptor } from './modules/auth/interceptors/auth.interceptor';
 import { RippleModule } from 'primeng/ripple';
+import { MainPageModule } from './modules/main-page/main-page.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { RippleModule } from 'primeng/ripple';
     CardModule,
     ToastModule,
     RippleModule,
+    MainPageModule,
   ],
   providers: [
     MessageService,
