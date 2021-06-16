@@ -5,6 +5,7 @@ import { DefaultValuePipe } from './pipes/default-value.pipe';
 import { BooleanPipe } from './pipes/is-private.pipe';
 import { CreatedUpdatedDatePipe } from './pipes/created-updated-date.pipe';
 import { TagsPipe } from './pipes/tags.pipe';
+import { PeriodPipe } from './pipes/period.pipe';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { TagsPipe } from './pipes/tags.pipe';
   declarations: [
     BooleanPipe,
     DefaultValuePipe, // TODO: move to separate module when needed
-    CreatedUpdatedDatePipe, TagsPipe,
+    CreatedUpdatedDatePipe, TagsPipe, PeriodPipe,
   ],
   providers: [
     ByIdResolver,
@@ -23,6 +24,7 @@ import { TagsPipe } from './pipes/tags.pipe';
     DefaultValuePipe,
     CreatedUpdatedDatePipe,
     TagsPipe,
+    PeriodPipe,
   ]
 })
 export class SharedModule {
