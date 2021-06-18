@@ -9,6 +9,7 @@ import { CURRENT_PAGE_REPORT_TEMPLATE, ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } fr
 import { PaginationChangedEvent } from '../../../../common/models/pagination-changed-event';
 import { calculatePage } from '../../../../common/utils/calculate-page';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SortEvent } from 'primeng/api';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersListComponent implements OnInit {
-  readonly perPage = ROWS_PER_PAGE;
+  perPage = ROWS_PER_PAGE;
   readonly perPageOptions = ROWS_PER_PAGE_OPTIONS;
   readonly currentPageReportTemplate = CURRENT_PAGE_REPORT_TEMPLATE;
   readonly columns: Array<TableCol> = [
@@ -38,6 +39,7 @@ export class UsersListComponent implements OnInit {
 
   totalItems: Observable<number>;
   selectedColumns: Array<TableCol> = this.columns;
+  page = 1;
 
   constructor(private readonly userService: UsersService,
               private readonly router: Router,
@@ -45,7 +47,7 @@ export class UsersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data = this.userService.getMany({perPage: ROWS_PER_PAGE, page: 1})
+    this.data = this.userService.getMany({perPage: this.perPage, page: this.page})
       .pipe(
         shareReplay(1),
       );
@@ -65,7 +67,9 @@ export class UsersListComponent implements OnInit {
   }
 
   pageChanged(ev: PaginationChangedEvent): void {
-    this.data = this.userService.getMany({perPage: ev.rows, page: calculatePage(ev.first, ev.rows)})
+    this.perPage = ev.rows;
+    this.page = calculatePage(ev.first, ev.rows);
+    this.data = this.userService.getMany({perPage: this.perPage, page: this.page})
       .pipe(
         shareReplay(1),
       );
@@ -77,6 +81,10 @@ export class UsersListComponent implements OnInit {
       .pipe(
         map(res => res.totalItems),
       );
+  }
+
+  onSort(ev: SortEvent): void {
+    console.log(ev);
   }
 
 }

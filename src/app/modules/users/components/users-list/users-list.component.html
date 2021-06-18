@@ -20,6 +20,7 @@
                  [currentPageReportTemplate]="currentPageReportTemplate"
                  [rowsPerPageOptions]="perPageOptions"
                  [rowHover]="true"
+                 (onSort)="onSort($event)"
                  (onPage)="pageChanged($event)"
                  scrollHeight="635px"
                  styleClass="p-datatable-sm">
