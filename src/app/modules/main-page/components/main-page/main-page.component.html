@@ -22,20 +22,19 @@
             <div class="d-flex align-items-center">
               <span>Пройдено тестов:</span>&nbsp;<p-skeleton *ngIf="(loading | async)===true" width="40px"
                                                              height="1.125rem" styleClass="ms-2"></p-skeleton>
-              <ng-container *ngIf="!(loading | async)">{{finishedTests$ | async}}</ng-container>
+              <ng-container *ngIf="!(loading | async)">{{(stats$ | async)?.periodStats?.finishedTests}}</ng-container>
             </div>
           </li>
         </ul>
       </p-card>
     </div>
-    <!--<div class="offset-sm-1 offset-0 col-12 col-sm-5">
+    <div class="offset-sm-1 offset-0 col-12 col-sm-5">
       <p-card>
         <h1>Статистика</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
-          numquam deserunt
-          quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-          quas!</p>
+        <ul>
+          <li>Активные пользователи: {{(stats$ | async)?.activeUsers}}</li>
+        </ul>
       </p-card>
-    </div>-->
+    </div>
   </div>
 </div>

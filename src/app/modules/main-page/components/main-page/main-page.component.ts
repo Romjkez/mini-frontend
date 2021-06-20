@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { StatsPeriod, StatsService } from '../../services/stats.service';
 import { Observable, ReplaySubject } from 'rxjs';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { shareReplay, tap } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { AppStats } from '../../models/app-stats';
 
 @Component({
   selector: 'mn-main-page',
@@ -11,7 +12,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainPageComponent implements OnInit {
-  finishedTests$: Observable<number>;
+  stats$: Observable<AppStats>;
   finishedTestsPeriod: StatsPeriod = StatsPeriod.DAY;
   periodOptions: Array<StatsPeriod> = Object.values(StatsPeriod);
   readonly selectedPeriod: FormControl = new FormControl(this.periodOptions[0]);
@@ -21,17 +22,15 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.finishedTests$ = this.statsService.getFinishedTestsStats(this.finishedTestsPeriod)
+    this.stats$ = this.statsService.getAppStats(this.finishedTestsPeriod)
       .pipe(
-        map(res => res.count),
         shareReplay(1)
       );
 
     this.selectedPeriod.valueChanges
       .pipe(
-        tap(period => this.finishedTests$ = this.statsService.getFinishedTestsStats(period)
+        tap(period => this.stats$ = this.statsService.getAppStats(period)
           .pipe(
-            map(res => res.count),
             shareReplay(1)
           )),
       )

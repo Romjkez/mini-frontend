@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { StatsCountResponseDto } from '../dto/stats-count-response.dto';
+import { AppStats } from '../models/app-stats';
 import { environment } from '../../../../environments/environment';
 
 export enum StatsPeriod {
@@ -20,7 +20,7 @@ export class StatsService {
   constructor(private readonly http: HttpClient) {
   }
 
-  getFinishedTestsStats(period: StatsPeriod): Observable<StatsCountResponseDto> {
-    return this.http.get<StatsCountResponseDto>(`${environment.apiHost}/stats/finished-tests?period=${period}`);
+  getAppStats(period: StatsPeriod): Observable<AppStats> {
+    return this.http.get<AppStats>(`${environment.apiHost}/stats/?period=${period}`);
   }
 }
