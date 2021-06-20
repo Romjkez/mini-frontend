@@ -8,6 +8,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { SkeletonModule } from 'primeng/skeleton';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     ReactiveFormsModule,
     SharedModule,
     SkeletonModule,
+    TooltipModule,
   ],
   providers: [
     StatsService,

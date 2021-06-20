@@ -32,7 +32,9 @@
       <p-card>
         <h1>Статистика</h1>
         <ul>
-          <li>Активные пользователи: {{(stats$ | async)?.activeUsers}}</li>
+          <li>Активные пользователи: {{(stats$ | async)?.activeUsers}}
+            <i class="pi pi-question-circle"
+               pTooltip="Количество пользователей, которые входили в систему за последние 30 дней"></i></li>
         </ul>
       </p-card>
     </div>
