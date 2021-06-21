@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UsersService } from '../../users.service';
 import { SimpleUser } from '../../models/simple-user.model';
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ import { SortType } from '../../../../common/models/sort-type';
   styleUrls: ['./users-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent {
   perPage = ROWS_PER_PAGE;
   readonly perPageOptions = ROWS_PER_PAGE_OPTIONS;
   readonly currentPageReportTemplate = CURRENT_PAGE_REPORT_TEMPLATE;
@@ -34,9 +34,6 @@ export class UsersListComponent implements OnInit {
   constructor(private readonly userService: UsersService,
               private readonly router: Router,
               private readonly route: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
   }
 
   onDblClick(userId: number): Promise<boolean> {

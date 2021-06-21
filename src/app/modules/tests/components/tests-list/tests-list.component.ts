@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TestService } from '../../test.service';
 import { Observable } from 'rxjs';
 import { GetManyResponseDto } from '../../../../common/dto/get-many-response.dto';
@@ -7,12 +7,10 @@ import { CURRENT_PAGE_REPORT_TEMPLATE, ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } fr
 import { PaginationChangedEvent } from '../../../../common/models/pagination-changed-event';
 import { calculatePage } from '../../../../common/utils/calculate-page';
 import { map, shareReplay } from 'rxjs/operators';
-import { TestSortDto } from '../../dto/test-sort.dto';
-import { convertSortType } from '../../../../common/utils/convert-sort-type';
-import { TestFilterDto } from '../../dto/test-filter.dto';
-import { MultiSortMeta } from '../../../../common/models/multi-sort-meta';
-import { SortMeta } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserSortDto } from '../../../users/dto/user-sort.dto';
+import { SortType } from '../../../../common/models/sort-type';
 
 @Component({
   selector: 'mn-tests-list',
@@ -20,7 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./tests-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TestsListComponent implements OnInit {
+export class TestsListComponent {
   perPage = ROWS_PER_PAGE;
   readonly perPageOptions = ROWS_PER_PAGE_OPTIONS;
   readonly currentPageReportTemplate = CURRENT_PAGE_REPORT_TEMPLATE;
@@ -29,34 +27,17 @@ export class TestsListComponent implements OnInit {
   tests: Observable<Array<SimpleTest>>;
   totalItems: Observable<number>;
   currentPage = 1;
-  sort: TestSortDto = {};
-  filter: TestFilterDto = {};
-  multiSortMeta: Array<SortMeta>;
+  sortField: keyof UserSortDto;
+  sortDirection: number;
 
   constructor(private readonly testService: TestService,
               private readonly router: Router,
               private readonly route: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
-    this.data = this.testService.getMany({perPage: ROWS_PER_PAGE, page: this.currentPage})
-      .pipe(
-        shareReplay(1),
-      );
-    this.tests = this.data
-      .pipe(
-        map(res => res.data),
-      );
-
-    this.totalItems = this.data
-      .pipe(
-        map(res => res.totalItems),
-      );
-  }
-
-  onSort(event: MultiSortMeta): void {
-    event.multisortmeta.forEach(meta => this.sort[meta.field] = convertSortType(meta.order));
-
+  loadTests(e: LazyLoadEvent): void {
+    this.sortField = e.sortField as keyof UserSortDto;
+    this.sortDirection = e.sortOrder;
     this.getData();
   }
 
@@ -72,7 +53,11 @@ export class TestsListComponent implements OnInit {
   }
 
   private getData(): void {
-    this.data = this.testService.getMany({perPage: this.perPage, page: this.currentPage, sort: this.sort, filter: this.filter})
+    this.data = this.testService.getMany({
+      perPage: this.perPage,
+      page: this.currentPage,
+      sort: {[this.sortField]: this.sortDirection === 1 ? SortType.ASC : SortType.DESC}
+    })
       .pipe(
         shareReplay(1),
       );
