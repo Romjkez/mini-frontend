@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, finalize, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { JwtPayload } from '../../models/jwt-payload';
@@ -18,7 +18,7 @@ import { errorToText } from '../../../../common/utils/error-to-text';
   styleUrls: ['./login-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   form: FormGroup = this.fb.group({
     email: [null, [Validators.required, Validators.email]],
     password: [null, Validators.required]
@@ -30,13 +30,11 @@ export class LoginPageComponent implements OnInit {
               private readonly messageService: MessageService) {
   }
 
-  ngOnInit(): void {
-  }
-
   onSubmit(): void {
     if (this.form.invalid) {
       return;
     }
+    this.form.disable();
     this.authService.signIn(this.form.value)
       .pipe(
         switchMap(async res => {
@@ -62,7 +60,8 @@ export class LoginPageComponent implements OnInit {
             life: TOAST_ERROR_TIME
           });
           throw new HttpErrorResponse(err);
-        })
+        }),
+        finalize(() => this.form.enable())
       )
       .subscribe();
   }
