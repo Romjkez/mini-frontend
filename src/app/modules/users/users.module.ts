@@ -17,10 +17,10 @@ import { SharedModule } from '../shared/shared.module';
 import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
 import { BadgeModule } from 'primeng/badge';
 import { TooltipModule } from 'primeng/tooltip';
-import { UserRatingPipe } from './components/pipes/user-rating.pipe';
-import { UserRolePipe } from './components/pipes/user-role.pipe';
 import { ChipModule } from 'primeng/chip';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { UserRolePipe } from './pipes/user-role.pipe';
+import { UserRatingPipe } from './pipes/user-rating.pipe';
 
 
 @NgModule({

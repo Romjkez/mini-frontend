@@ -12,4 +12,8 @@ export interface UserSortDto {
   isPrivate?: SortType;
 
   rating?: SortType;
+
+  createdAt?: SortType;
+
+  updatedAt?: SortType;
 }
