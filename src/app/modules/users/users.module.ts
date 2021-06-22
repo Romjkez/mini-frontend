@@ -17,10 +17,14 @@ import { SharedModule } from '../shared/shared.module';
 import { CRUD_SERVICE } from '../shared/resolvers/by-id.resolver';
 import { BadgeModule } from 'primeng/badge';
 import { TooltipModule } from 'primeng/tooltip';
-import { UserRatingPipe } from './components/pipes/user-rating.pipe';
-import { UserRolePipe } from './components/pipes/user-role.pipe';
 import { ChipModule } from 'primeng/chip';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { UserRolePipe } from './pipes/user-role.pipe';
+import { UserRatingPipe } from './pipes/user-rating.pipe';
+import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
+import { MenuModule } from 'primeng/menu';
+import { DialogModule } from 'primeng/dialog';
+import { PasswordModule } from 'primeng/password';
 
 
 @NgModule({
@@ -30,7 +34,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     UserViewComponent,
     UserFormComponent,
     UserRatingPipe,
-    UserRolePipe
+    UserRolePipe,
+    ChangePasswordModalComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +52,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TooltipModule,
     ChipModule,
     ProgressSpinnerModule,
+    MenuModule,
+    DialogModule,
+    PasswordModule,
   ],
   providers: [
     UsersService,

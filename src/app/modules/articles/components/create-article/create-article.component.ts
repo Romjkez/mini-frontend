@@ -97,11 +97,16 @@ export class CreateArticleComponent implements OnInit {
     this.form.get('video').setValidators([Validators.required]);
     this.form.get('content').reset();
     this.form.get('content').clearValidators();
+    this.form.get('content').updateValueAndValidity();
+    this.form.get('video').updateValueAndValidity();
   }
 
   private switchToContent(): void {
     this.form.get('content').setValidators([Validators.required]);
     this.form.get('video').reset();
     this.form.get('video').clearValidators();
+    this.form.updateValueAndValidity();
+    this.form.get('video').updateValueAndValidity();
+    this.form.get('content').updateValueAndValidity();
   }
 }

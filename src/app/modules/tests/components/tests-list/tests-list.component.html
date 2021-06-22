@@ -7,11 +7,11 @@
   <div class="row">
     <div class="col" [ngClass]="(tests | async) ? '':'d-flex justify-content-center'">
       <p-progressSpinner *ngIf="!(tests | async)"></p-progressSpinner>
-      <ng-container *ngIf="tests | async as tests">
-        <p-table *ngIf="tests.length > 0" [lazy]="true"
+      <ng-container>
+        <p-table [lazy]="true"
                  [scrollable]="true"
                  [paginator]="true"
-                 [value]="tests"
+                 [value]="tests | async"
                  [rows]="perPage"
                  [resetPageOnSort]="true"
                  [totalRecords]="totalItems | async"
@@ -19,10 +19,8 @@
                  [currentPageReportTemplate]="currentPageReportTemplate"
                  [rowsPerPageOptions]="perPageOptions"
                  [rowHover]="true"
-                 [multiSortMeta]="multiSortMeta"
-                 (onSort)="onSort($event)"
+                 (onLazyLoad)="loadTests($event)"
                  (onPage)="pageChanged($event)"
-                 sortMode="multiple"
                  scrollHeight="635px"
                  styleClass="p-datatable-sm">
           <ng-template pTemplate="colgroup">
@@ -93,7 +91,7 @@
           </ng-template>
 
         </p-table>
-        <p *ngIf="tests.length === 0" class="h2 text-color text-center">Список тестов пуст</p>
+        <p *ngIf="(tests | async)?.length === 0" class="h2 text-color text-center">Список тестов пуст</p>
       </ng-container>
     </div>
   </div>

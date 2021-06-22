@@ -4,12 +4,20 @@
       <p-card>
         <div class="container d-flex justify-content-between align-items-center">
           <div>
-            <h1 class="h2">Пользователь #{{user.id}}</h1>
-            <p-chip [label]="user.role | userRole" [icon]="'pi pi-user'"></p-chip>
+            <h1 class="h2">Пользователь #{{(user | async).id}}</h1>
+            <p-chip [label]="(user | async).role | userRole" [icon]="'pi pi-user'"></p-chip>
+            <p-chip *ngIf="(user | async).bannedAt" styleClass="banned-chip ms-sm-2 mt-2 mt-sm-0"
+                    label="Заблокирован" [icon]="'pi pi-lock'"
+                    title="Этот пользователь не может входить в систему">
+            </p-chip>
+            <p-chip *ngIf="(user | async).bannedAt === null" styleClass="active-chip ms-sm-2 mt-2 mt-sm-0"
+                    label="Активен"
+                    [icon]="'pi pi-lock-open'">
+            </p-chip>
           </div>
           <p-badge
             pTooltip="Рейтинг пользователя, представляет собой % правильных ответов на вопросы во всех пройденных тестах"
-            [value]="user.rating | userRating | defaultValue">
+            [value]="(user | async).rating | userRating | defaultValue">
           </p-badge>
         </div>
         <mn-user-form [readonly]="true" [form]="form"></mn-user-form>
@@ -17,22 +25,33 @@
           <hr class="my-4">
           <h3>Статистика</h3>
           <div class="row">
-            <div class="col-md-6">Завершено тестов: {{user.finishedTests}}</div>
-            <div class="col-md-6">Прочитано статей: {{user.finishedArticles}}</div>
-            <div class="col-md-6">Избранных статей: {{user.favoriteArticles}}</div>
+            <div class="col-md-6">Завершено тестов: {{(user | async).finishedTests}}</div>
+            <div class="col-md-6">Прочитано статей: {{(user | async).finishedArticles}}</div>
+            <div class="col-md-6">Избранных статей: {{(user | async).favoriteArticles}}</div>
           </div>
         </section>
         <section class="container">
           <hr class="my-4">
           <h3>Другое</h3>
           <div class="row">
-            <div class="col-md-6">Дата создания: {{user.createdAt | date:'dd.MM.YYYY HH:mm'}}</div>
-            <div class="col-md-6">Дата обновления: {{user.updatedAt | date:'dd.MM.YYYY HH:mm'}}</div>
-            <div class="col-md-6">Приватный профиль: {{user.isPrivate | boolean}}</div>
-            <div class="col-md-6">Дата блокировки: {{user.bannedAt | date:'dd.MM.YYYY HH:mm' | defaultValue}}</div>
+            <div class="col-md-6">Дата создания: {{(user | async).createdAt | date:'dd.MM.YYYY HH:mm'}}</div>
+            <div class="col-md-6">Дата обновления: {{(user | async).updatedAt | date:'dd.MM.YYYY HH:mm'}}</div>
+            <div class="col-md-6">Приватный профиль: {{(user | async).isPrivate | boolean}}</div>
+            <div class="col-md-6">Дата
+              блокировки: {{(user | async).bannedAt | date:'dd.MM.YYYY HH:mm' | defaultValue}}</div>
           </div>
         </section>
       </p-card>
     </div>
+    <div class="col-auto">
+      <button class="p-button-rounded p-button-info" type="button" pButton icon="pi pi-cog" title="Настройки"
+              (click)="menu.toggle($event)"></button>
+      <p-menu #menu [popup]="true" [model]="settingsItems$ | async"></p-menu>
+    </div>
   </div>
 </div>
+
+<p-dialog header="Изменение пароля" [modal]="true" [(visible)]="changePasswordModalVisible">
+  <mn-change-password-modal [userId]="(user | async)?.id"
+                            (passwordChanged)="changePasswordModalVisible=false"></mn-change-password-modal>
+</p-dialog>

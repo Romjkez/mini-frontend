@@ -7,12 +7,11 @@
   <div class="row">
     <div class="col" [ngClass]="(users | async) ? '':'d-flex justify-content-center'">
       <p-progressSpinner *ngIf="!(users | async)"></p-progressSpinner>
-      <ng-container *ngIf="users | async as users">
-        <p-table *ngIf="users.length > 0" [lazy]="true"
+      <ng-container>
+        <p-table [lazy]="true"
                  [scrollable]="true"
-                 [columns]="selectedColumns"
                  [paginator]="true"
-                 [value]="users"
+                 [value]="users | async"
                  [rows]="perPage"
                  [resetPageOnSort]="true"
                  [totalRecords]="totalItems | async"
@@ -20,6 +19,7 @@
                  [currentPageReportTemplate]="currentPageReportTemplate"
                  [rowsPerPageOptions]="perPageOptions"
                  [rowHover]="true"
+                 (onLazyLoad)="loadUsers($event)"
                  (onPage)="pageChanged($event)"
                  scrollHeight="635px"
                  styleClass="p-datatable-sm">
@@ -58,8 +58,7 @@
               <th pSortableColumn="email">Email
                 <p-sortIcon field="email"></p-sortIcon>
               </th>
-              <th pSortableColumn="role">Роль
-                <p-sortIcon field="role"></p-sortIcon>
+              <th>Роль
               </th>
               <th pSortableColumn="company">Компания
                 <p-sortIcon field="company"></p-sortIcon>
@@ -75,7 +74,8 @@
               <th pSortableColumn="isPrivate">Приватный профиль
                 <p-sortIcon field="isPrivate"></p-sortIcon>
               </th>
-              <th>Дата блокировки
+              <th pSortableColumn="bannedAt">Дата блокировки
+                <p-sortIcon field="bannedAt"></p-sortIcon>
               </th>
             </tr>
           </ng-template>
@@ -97,7 +97,7 @@
           </ng-template>
 
         </p-table>
-        <p *ngIf="users.length === 0" class="h2 text-color text-center">Список пользователей пуст</p>
+        <p *ngIf="(users | async)?.length === 0" class="h2 text-color text-center">Список пользователей пуст</p>
       </ng-container>
     </div>
   </div>

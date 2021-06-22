@@ -8,6 +8,7 @@ import { GetManyUsersDto } from './dto/get-many-users.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './models/user.model';
 import { CrudService } from '../../common/models/crud.service';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class UsersService implements CrudService<User> {
@@ -29,5 +30,17 @@ export class UsersService implements CrudService<User> {
 
   createBulk(dto: Array<CreateUserDto>): Observable<Array<User>> {
     return this.http.post<Array<User>>(`${environment.apiHost}/user/bulk`, {data: dto});
+  }
+
+  changePassword(id: number, dto: ChangePasswordDto): Observable<void> {
+    return this.http.put<void>(`${environment.apiHost}/user/${id}/password`, dto);
+  }
+
+  ban(id: number): Observable<void> {
+    return this.http.post<void>(`${environment.apiHost}/user/${id}/deactivate`, null);
+  }
+
+  unban(id: number): Observable<void> {
+    return this.http.post<void>(`${environment.apiHost}/user/${id}/activate`, null);
   }
 }

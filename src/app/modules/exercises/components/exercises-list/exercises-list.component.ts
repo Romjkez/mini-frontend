@@ -1,18 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CURRENT_PAGE_REPORT_TEMPLATE, ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from '../../../../common/constants';
-import { SortMeta } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { GetManyResponseDto } from '../../../../common/dto/get-many-response.dto';
 import { SimpleExercise } from '../../models/simple-exercise';
 import { ExerciseService } from '../../exercise.service';
-import { ExerciseSortDto } from '../../dto/exercise-sort.dto';
-import { ExerciseFilterDto } from '../../dto/exercise-filter.dto';
 import { map, shareReplay } from 'rxjs/operators';
-import { MultiSortMeta } from '../../../../common/models/multi-sort-meta';
-import { convertSortType } from '../../../../common/utils/convert-sort-type';
 import { PaginationChangedEvent } from '../../../../common/models/pagination-changed-event';
 import { calculatePage } from '../../../../common/utils/calculate-page';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SortType } from '../../../../common/models/sort-type';
+import { UserSortDto } from '../../../users/dto/user-sort.dto';
 
 @Component({
   selector: 'mn-exercises-list',
@@ -29,9 +27,8 @@ export class ExercisesListComponent implements OnInit {
   exercises: Observable<Array<SimpleExercise>>;
   totalItems: Observable<number>;
   currentPage = 1;
-  sort: ExerciseSortDto = {};
-  filter: ExerciseFilterDto = {};
-  multiSortMeta: Array<SortMeta>;
+  sortField: keyof UserSortDto;
+  sortDirection: number;
 
   constructor(private readonly exerciseService: ExerciseService,
               private readonly router: Router,
@@ -39,24 +36,12 @@ export class ExercisesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data = this.exerciseService.getMany({perPage: ROWS_PER_PAGE, page: this.currentPage})
-      .pipe(
-        shareReplay(1),
-      );
-    this.exercises = this.data
-      .pipe(
-        map(res => res.data),
-      );
 
-    this.totalItems = this.data
-      .pipe(
-        map(res => res.totalItems),
-      );
   }
 
-  onSort(event: MultiSortMeta): void {
-    event.multisortmeta.forEach(meta => this.sort[meta.field] = convertSortType(meta.order));
-
+  loadExercises(e: LazyLoadEvent): void {
+    this.sortField = e.sortField as keyof UserSortDto;
+    this.sortDirection = e.sortOrder;
     this.getData();
   }
 
@@ -72,7 +57,9 @@ export class ExercisesListComponent implements OnInit {
   }
 
   private getData(): void {
-    this.data = this.exerciseService.getMany({perPage: this.perPage, page: this.currentPage, sort: this.sort, filter: this.filter})
+    this.data = this.exerciseService.getMany({
+      perPage: this.perPage, page: this.currentPage, sort: {[this.sortField]: this.sortDirection === 1 ? SortType.ASC : SortType.DESC}
+    })
       .pipe(
         shareReplay(1),
       );

@@ -27,8 +27,8 @@ jobs:
       - name: lint
         run: yarn lint
 
-      - name: test
-        run: yarn test --watch=false
+      #- name: test
+      #  run: yarn test --watch=false
 
       - name: build
         run: yarn build --prod

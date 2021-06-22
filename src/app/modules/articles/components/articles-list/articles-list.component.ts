@@ -15,17 +15,18 @@ import { calculatePage } from '../../../../common/utils/calculate-page';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticlesListComponent implements OnInit {
-  readonly perPage = ROWS_PER_PAGE;
+  perPage = ROWS_PER_PAGE;
   readonly perPageOptions = ROWS_PER_PAGE_OPTIONS;
   data: Observable<GetManyResponseDto<Article>>;
   articles: Observable<Array<Article>>;
   totalItems: Observable<number>;
+  page = 1;
 
   constructor(private readonly articleService: ArticleService) {
   }
 
   ngOnInit(): void {
-    this.data = this.articleService.getMany({perPage: ROWS_PER_PAGE, page: 1})
+    this.data = this.articleService.getMany({perPage: this.perPage, page: this.page})
       .pipe(
         shareReplay(1)
       );
@@ -40,7 +41,9 @@ export class ArticlesListComponent implements OnInit {
   }
 
   pageChanged(ev: PaginationChangedEvent): void {
-    this.data = this.articleService.getMany({perPage: ev.rows, page: calculatePage(ev.first, ev.rows)})
+    this.perPage = ev.rows;
+    this.page = calculatePage(ev.first, ev.rows);
+    this.data = this.articleService.getMany({perPage: this.perPage, page: this.page})
       .pipe(
         shareReplay(1),
       );

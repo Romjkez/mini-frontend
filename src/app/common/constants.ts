@@ -12,6 +12,8 @@ export const ERRORS: Record<string, string> = {
   INVALID_CREDENTIALS: 'Неверный email или пароль',
   EMAIL_ALREADY_EXISTS: 'Пользователь с таким email уже зарегистрирован',
   USER_NOT_FOUND: 'Пользователь с таким email не найден',
+  WRONG_CONTENT: 'Статья должна содержать не менее 3 символов',
+  WRONG_VIDEO_CONTENT: 'Разрешены только ссылки с YouTube',
   'Not Found': 'Сущность с таким ID не найдена',
 };
 
