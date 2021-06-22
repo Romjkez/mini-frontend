@@ -1,0 +1,10 @@
+::ng-deep p-chip {
+  .active-chip {
+    background-color: var(--green-500);
+  }
+
+  .banned-chip {
+    background-color: var(--pink-500);
+  }
+}
+

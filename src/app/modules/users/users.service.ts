@@ -35,4 +35,12 @@ export class UsersService implements CrudService<User> {
   changePassword(id: number, dto: ChangePasswordDto): Observable<void> {
     return this.http.put<void>(`${environment.apiHost}/user/${id}/password`, dto);
   }
+
+  ban(id: number): Observable<void> {
+    return this.http.post<void>(`${environment.apiHost}/user/${id}/deactivate`, null);
+  }
+
+  unban(id: number): Observable<void> {
+    return this.http.post<void>(`${environment.apiHost}/user/${id}/activate`, null);
+  }
 }
