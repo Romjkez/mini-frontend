@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { UsersService } from '../../users.service';
 import { User } from '../../models/user.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { first, map, tap } from 'rxjs/operators';
+import { MenuItem } from 'primeng/api';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'mn-user-view',
@@ -14,11 +16,20 @@ import { first, map, tap } from 'rxjs/operators';
 export class UserViewComponent implements OnInit {
   user: User;
   form: FormGroup;
+  isMyProfile: boolean;
+  changePasswordModalVisible: boolean;
+  settingsItems: Array<MenuItem> = [
+    {
+      label: 'Изменить пароль',
+      icon: 'pi pi-key',
+      command: this.showChangePasswordModal.bind(this)
+    }
+  ];
 
   constructor(private readonly userService: UsersService,
+              private readonly authService: AuthService,
               private readonly activatedRoute: ActivatedRoute,
-              private readonly fb: FormBuilder,
-              private readonly router: Router) {
+              private readonly fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -34,9 +45,14 @@ export class UserViewComponent implements OnInit {
             email: this.fb.control(user.email),
             company: this.fb.control(user.company || '-'),
           });
+          this.isMyProfile = this.authService.getPayload().sub === user.id;
         })
       )
       .subscribe();
+  }
+
+  showChangePasswordModal(): void {
+    this.changePasswordModalVisible = true;
   }
 
 }

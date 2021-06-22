@@ -21,6 +21,10 @@ import { ChipModule } from 'primeng/chip';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { UserRolePipe } from './pipes/user-role.pipe';
 import { UserRatingPipe } from './pipes/user-rating.pipe';
+import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
+import { MenuModule } from 'primeng/menu';
+import { DialogModule } from 'primeng/dialog';
+import { PasswordModule } from 'primeng/password';
 
 
 @NgModule({
@@ -30,7 +34,8 @@ import { UserRatingPipe } from './pipes/user-rating.pipe';
     UserViewComponent,
     UserFormComponent,
     UserRatingPipe,
-    UserRolePipe
+    UserRolePipe,
+    ChangePasswordModalComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +52,9 @@ import { UserRatingPipe } from './pipes/user-rating.pipe';
     TooltipModule,
     ChipModule,
     ProgressSpinnerModule,
+    MenuModule,
+    DialogModule,
+    PasswordModule,
   ],
   providers: [
     UsersService,

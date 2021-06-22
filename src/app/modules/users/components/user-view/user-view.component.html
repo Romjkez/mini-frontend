@@ -34,5 +34,15 @@
         </section>
       </p-card>
     </div>
+    <div *ngIf="isMyProfile" class="col-auto">
+      <button class="p-button-rounded p-button-info" type="button" pButton icon="pi pi-cog" title="Настройки"
+              (click)="menu.toggle($event)"></button>
+      <p-menu #menu [popup]="true" [model]="settingsItems"></p-menu>
+    </div>
   </div>
 </div>
+
+<p-dialog header="Изменение пароля" [modal]="true" [(visible)]="changePasswordModalVisible">
+  <mn-change-password-modal [userId]="user?.id"
+                            (passwordChanged)="changePasswordModalVisible=false"></mn-change-password-modal>
+</p-dialog>
