@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CURRENT_PAGE_REPORT_TEMPLATE, ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from '../../../../common/constants';
 import { LazyLoadEvent } from 'primeng/api';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ import { UserSortDto } from '../../../users/dto/user-sort.dto';
   styleUrls: ['./exercises-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExercisesListComponent implements OnInit {
+export class ExercisesListComponent {
   perPage = ROWS_PER_PAGE;
   readonly perPageOptions = ROWS_PER_PAGE_OPTIONS;
   readonly currentPageReportTemplate = CURRENT_PAGE_REPORT_TEMPLATE;
@@ -33,10 +33,6 @@ export class ExercisesListComponent implements OnInit {
   constructor(private readonly exerciseService: ExerciseService,
               private readonly router: Router,
               private readonly route: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
-
   }
 
   loadExercises(e: LazyLoadEvent): void {

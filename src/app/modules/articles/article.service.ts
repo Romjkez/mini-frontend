@@ -25,4 +25,12 @@ export class ArticleService implements CrudService<Article> {
   getMany<M = Article>(dto: GetManyArticlesDto): Observable<GetManyResponseDto<M>> {
     return this.http.post<GetManyResponseDto<M>>(`${environment.apiHost}/article/getMany`, dto);
   }
+
+  publish(id: number): Observable<void> {
+    return this.http.post<void>(`${environment.apiHost}/article/${id}/show`, null);
+  }
+
+  hide(id: number): Observable<void> {
+    return this.http.post<void>(`${environment.apiHost}/article/${id}/hide`, null);
+  }
 }
