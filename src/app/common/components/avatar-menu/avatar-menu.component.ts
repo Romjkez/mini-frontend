@@ -30,10 +30,6 @@ export class AvatarMenuComponent implements OnInit {
         routerLink: `/users/${this.authService.getPayload().sub}`
       },
       {
-        label: 'Настройки',
-        icon: 'pi pi-cog'
-      },
-      {
         label: 'Выход',
         icon: 'pi pi-sign-out',
         command: this.onLogout.bind(this)
