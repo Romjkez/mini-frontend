@@ -19,7 +19,7 @@
                  [currentPageReportTemplate]="currentPageReportTemplate"
                  [rowsPerPageOptions]="perPageOptions"
                  [rowHover]="true"
-                 (onSort)="loadExercises($event)"
+                 (onLazyLoad)="loadExercises($event)"
                  (onPage)="pageChanged($event)"
                  scrollHeight="635px"
                  styleClass="p-datatable-sm">
